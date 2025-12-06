@@ -1,0 +1,518 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <cstdio>
+using namespace std;
+void ChooseMode(string topicName[], string& difficulty, string Topics[100][6]);
+void AdminMode(string topicName[], string& difficulty,string Topics[100][6]);
+void Addtopic(string topicName[], string& difficulty, string Topics[100][6]);
+void RemoveTopic();
+void AddMcqs(string topicName[], string& difficulty, string Topics[100][6]);
+
+
+int main() {
+	string topicName[100];
+	string Topics[100][6];
+	string difficulty;
+	string a="";
+	
+	string password="vishal";
+	string Username= " ";
+	int mode;
+	cout << "___welcome to Quiz generator___\n";
+	ChooseMode(topicName, difficulty, Topics);
+	
+	/*ofstream outN;
+	outN.open("topicNames.txt");
+	string line="";
+	outN << line;*/
+	
+	
+
+}
+void ChooseMode(string topicName[], string& difficulty, string Topics[100][6]) {
+	int x;
+	string password = "vishal",Enterpassword;
+
+	while (true) {
+		cout << "Select Mode:\n1. Admin\n2. User\n";
+		cin >> x;
+		if (x == 1) {
+			cout << "Enter password: ";
+			cin >> Enterpassword;
+			if (Enterpassword == password) {
+				AdminMode(topicName, difficulty, Topics);
+				return;
+			}
+			else {
+				cout << "Wrong password!\n";
+			}
+		}
+		else if (x == 2) {
+			cout << "Enter Username: ";
+			return;
+		}
+		else {
+			cout << "Invalid command!\n";
+		}
+	}
+}
+
+
+void AdminMode(string topicName[], string& difficulty,string Topics[100][6]) {
+	int choose;
+	int exit;
+	cout << "\ncontinue ? > enter: 1\nExit Admin mode ? > enter: 2\n";
+	cin >> exit;
+	if (exit == 2) return;
+
+	cout << "What you want to do?";
+	cout << "\n1. Add Topic\n2. Remove Topic\n3. Add MCQs to a Topic\n4. view Topics\n5. Exit Admin Mode\n";
+	cin >> choose;
+	if (choose == 1) {
+		Addtopic(topicName, difficulty, Topics);
+	}
+	else if (choose == 2) RemoveTopic();
+
+	else if (choose == 3) AddMcqs(topicName, difficulty, Topics);
+
+	else if (choose == 4) {
+		cout << "All saved topics are \n\n";
+		ifstream outN;
+		outN.open("topicNames.txt", ios::in);
+		string line;
+		int i = 1;
+		while (getline(outN, line)) {
+			cout << i++ << ". " << line << endl;
+		}
+		outN.close();
+
+	}
+	else if (choose == 5) {
+		return;
+	}
+}
+void Addtopic(string topicName[], string& difficulty, string Topics[100][6]) {
+	ofstream outN;
+	int out = 1, level;
+	cout << "Enter: \n1. continue\n2. exit\n ";
+	cin >> out;
+	if (out == 2) {
+		cout << "You Exit!\n";
+	}
+	
+	for (int i = 0; (i < 100) && out == 1; i++) {
+		cin.ignore();
+		cout << "Enter the Topic name: ";
+		getline(cin , topicName[i]);
+		ofstream out("topicNames.txt", ios::app);
+		out << topicName[i] << endl;
+		out.close();
+		outN.open(topicName[i] + ".txt", ios::app);
+		outN << topicName[i]<<endl;
+		outN.close();
+
+		cout << "\nEnter the Difficulty level of Quiz: \n1. Easy\n2. Medium\n3. Hard \n";
+		cin >> level;
+		cin.ignore();
+
+		if (level == 1) {
+			int exit = 1;
+			difficulty = "Easy";
+			outN.open(topicName[i] + ".txt", ios::app);
+			outN <<"Difficult level: " <<difficulty << endl;
+			int q = 0;
+
+			while (q < 100 && exit == 1) {
+
+				cout << "Enter question: ";
+				getline(cin, Topics[q][0]);
+
+				cout << "Option A: ";
+				getline(cin, Topics[q][1]);
+
+				cout << "Option B: ";
+				getline(cin, Topics[q][2]);
+
+				cout << "Option C: ";
+				getline(cin, Topics[q][3]);
+
+				cout << "Option D: ";
+				getline(cin, Topics[q][4]);
+
+				cout << "Correct option: ";
+				getline(cin, Topics[q][5]);
+
+				// Write all to file
+				outN << "Q: " << Topics[q][0] << endl;
+				outN << "A) " << Topics[q][1] << endl;
+				outN << "B) " << Topics[q][2] << endl;
+				outN << "C) " << Topics[q][3] << endl;
+				outN << "D) " << Topics[q][4] << endl;
+				outN << "Correct: " << Topics[q][5] << endl;
+				outN << "-----------------" << endl;
+				
+				q++;
+				cout << "\nEnter: \n1. continue\n2. exit\n";
+				cin >> exit;
+				if (exit == 2) break;
+				cin.ignore();
+				
+
+				
+
+				
+			}
+			outN.close();
+		}
+
+		if (level == 2) {
+			int exit = 1;
+			difficulty = "Medium";
+			outN.open(topicName[i] + ".txt", ios::app);
+			outN << difficulty << endl;
+			int q = 0;
+
+			while (q < 100 && exit == 1) {
+
+				cout << "Enter question: ";
+				getline(cin, Topics[q][0]);
+
+				cout << "Option A: ";
+				getline(cin, Topics[q][1]);
+
+				cout << "Option B: ";
+				getline(cin, Topics[q][2]);
+
+				cout << "Option C: ";
+				getline(cin, Topics[q][3]);
+
+				cout << "Option D: ";
+				getline(cin, Topics[q][4]);
+
+				cout << "Correct option: ";
+				getline(cin, Topics[q][5]);
+
+				// Write all to file
+				outN << "Q: " << Topics[q][0] << endl;
+				outN << "A) " << Topics[q][1] << endl;
+				outN << "B) " << Topics[q][2] << endl;
+				outN << "C) " << Topics[q][3] << endl;
+				outN << "D) " << Topics[q][4] << endl;
+				outN << "Correct: " << Topics[q][5] << endl;
+				outN << "-----------------" << endl;
+				q++;
+				
+				cout << "\nEnter: \n1. continue\n2. exit\n";
+				cin >> exit;
+				if (exit == 2) break;
+				cin.ignore();
+				
+				
+
+
+			}
+			outN.close();
+		}
+
+		if (level == 3) {
+			int exit = 1;
+			difficulty = "Hard";
+			outN.open(topicName[i] + ".txt", ios::app);
+			outN << difficulty << endl;
+			int q = 0;
+
+			while (q < 100 && exit == 1) {
+
+				cout << "Enter question: ";
+				getline(cin, Topics[q][0]);
+
+				cout << "Option A: ";
+				getline(cin, Topics[q][1]);
+
+				cout << "Option B: ";
+				getline(cin, Topics[q][2]);
+
+				cout << "Option C: ";
+				getline(cin, Topics[q][3]);
+
+				cout << "Option D: ";
+				getline(cin, Topics[q][4]);
+
+				cout << "Correct option: ";
+				getline(cin, Topics[q][5]);
+
+				// Write all to file
+				outN << "Q: " << Topics[q][0] << endl;
+				outN << "A) " << Topics[q][1] << endl;
+				outN << "B) " << Topics[q][2] << endl;
+				outN << "C) " << Topics[q][3] << endl;
+				outN << "D) " << Topics[q][4] << endl;
+				outN << "Correct: " << Topics[q][5] << endl;
+				outN << "-----------------" << endl;
+				
+				q++;
+				cout << "\nEnter: \n1. continue\n2. exit\n";
+				cin >> exit;
+				if (exit == 2) break;
+				cin.ignore();
+				
+
+				
+
+
+			}
+			outN.close();
+		}
+	}
+}
+
+
+void RemoveTopic() {
+	string Name;
+	int confirm;
+	cout << "\ncontinue ? > enter: 1\nExit ? > enter: 2\n";
+	cin >> confirm;
+	if (confirm == 2) return;
+	cin.ignore();
+	ifstream outN;
+	ofstream in("temp.txt");
+	outN.open("topicNames.txt", ios::in);
+	string line;
+	int i = 1;
+	while (getline(outN, line)) {
+		cout <<i++<<". "<< line << endl;
+	}
+	outN.clear();
+	outN.seekg(0);
+	cout << "\nEnter the topic which you want to remove: ";
+	bool found = false;
+	getline(cin, Name);
+	while (getline(outN, line)) {
+		if (Name == line) {
+			cout << "Remove " << Name << " ?\n1. Yes\n2. NO\nEnter 1 or 2: ";
+			cin >> confirm;
+			found = true;
+			if (confirm == 1) {
+				outN.close();
+				remove((Name + ".txt").c_str());
+				RemoveTopic();
+			}
+			else {
+				RemoveTopic();
+			}
+		}
+		else { in << line << endl; } // for removig topic from topicname file
+
+	}
+	in.close();
+	outN.close();
+	remove("topicNames.txt");
+	rename("temp.txt", "topicNames.txt");
+	if (!found) {
+		cout << "Either topic is not included or Spelling is not Correct!\n";
+		RemoveTopic();
+	}
+
+}
+
+void AddMcqs(string topicName[], string& difficulty, string Topics[100][6]) {
+	int confirm;
+	int level;
+	bool found = false;
+	string Name;
+
+	cout << "\ncontinue ? > enter: 1\nBack to Admin mode ? > enter: 2\n";
+	cin >> confirm;
+	if (confirm == 2) return;
+	cin.ignore();
+
+
+	ifstream out("topicNames.txt");
+	string line;
+
+	while (getline(out, line)) {
+		cout << line << endl;
+	}
+
+	cout << "Enter topic: ";
+	getline(cin, Name);
+
+	out.clear();     
+	out.seekg(0);    
+
+	
+	while (getline(out, line)) {
+		if (line == Name) found = true;
+	}
+
+	if (!found) {
+		cout << "Either topic is not included or Spelling is not Correct!\n";
+		AddMcqs(topicName, difficulty, Topics);
+	}
+	else {
+		for (int i = 0; (i < 100); i++) {
+
+			ofstream outN;
+
+			cout << "Enter the Difficulty level of Quiz: \n1. Easy\n2. Medium\n3. Hard \n";
+			cin >> level;
+			cin.ignore();
+
+			if (level == 1) {
+				int exit = 1;
+				difficulty = "Easy";
+				outN.open(Name + ".txt", ios::app);
+
+				outN << "Difficult level: " << difficulty << endl;
+				int q = 0;
+
+				while (q < 100 && exit == 1) {
+
+					cout << "Enter question: ";
+					getline(cin, Topics[q][0]);
+
+					cout << "Option A: ";
+					getline(cin, Topics[q][1]);
+
+					cout << "Option B: ";
+					getline(cin, Topics[q][2]);
+
+					cout << "Option C: ";
+					getline(cin, Topics[q][3]);
+
+					cout << "Option D: ";
+					getline(cin, Topics[q][4]);
+
+					cout << "Correct option: ";
+					getline(cin, Topics[q][5]);
+
+					// Write all to file
+					outN << "Q: " << Topics[q][0] << endl;
+					outN << "A) " << Topics[q][1] << endl;
+					outN << "B) " << Topics[q][2] << endl;
+					outN << "C) " << Topics[q][3] << endl;
+					outN << "D) " << Topics[q][4] << endl;
+					outN << "Correct: " << Topics[q][5] << endl;
+					outN << "-----------------" << endl;
+					outN.close();
+					q++;
+					cout << "\nEnter: \n1. continue\n2. exit\n";
+					cin >> exit;
+					if (exit == 2) break;
+					cin.ignore();
+
+
+
+
+
+				}
+			}
+
+			else if (level == 2) {
+				int exit = 1;
+				difficulty = "Medium";
+				outN.open(Name + ".txt", ios::app);
+				outN << difficulty << endl;
+				int q = 0;
+
+				while (q < 100 && exit == 1) {
+
+					cout << "Enter question: ";
+					getline(cin, Topics[q][0]);
+
+					cout << "Option A: ";
+					getline(cin, Topics[q][1]);
+
+					cout << "Option B: ";
+					getline(cin, Topics[q][2]);
+
+					cout << "Option C: ";
+					getline(cin, Topics[q][3]);
+
+					cout << "Option D: ";
+					getline(cin, Topics[q][4]);
+
+					cout << "Correct option: ";
+					getline(cin, Topics[q][5]);
+
+					// Write all to file
+					outN << "Q: " << Topics[q][0] << endl;
+					outN << "A) " << Topics[q][1] << endl;
+					outN << "B) " << Topics[q][2] << endl;
+					outN << "C) " << Topics[q][3] << endl;
+					outN << "D) " << Topics[q][4] << endl;
+					outN << "Correct: " << Topics[q][5] << endl;
+					outN << "-----------------" << endl;
+					q++;
+					outN.close();
+					cout << "\nEnter: \n1. continue\n2. exit\n";
+					cin >> exit;
+					if (exit == 2) break;
+					cin.ignore();
+
+
+
+
+				}
+			}
+
+			else if (level == 3) {
+				int exit = 1;
+				difficulty = "Hard";
+				outN.open(Name + ".txt", ios::app);
+				outN << difficulty << endl;
+				int q = 0;
+
+				while (q < 100 && exit == 1) {
+
+					cout << "Enter question: ";
+					getline(cin, Topics[q][0]);
+
+					cout << "Option A: ";
+					getline(cin, Topics[q][1]);
+
+					cout << "Option B: ";
+					getline(cin, Topics[q][2]);
+
+					cout << "Option C: ";
+					getline(cin, Topics[q][3]);
+
+					cout << "Option D: ";
+					getline(cin, Topics[q][4]);
+
+					cout << "Correct option: ";
+					getline(cin, Topics[q][5]);
+
+					// Write all to file
+					outN << "Q: " << Topics[q][0] << endl;
+					outN << "A) " << Topics[q][1] << endl;
+					outN << "B) " << Topics[q][2] << endl;
+					outN << "C) " << Topics[q][3] << endl;
+					outN << "D) " << Topics[q][4] << endl;
+					outN << "Correct: " << Topics[q][5] << endl;
+					outN << "-----------------" << endl;
+					outN.close();
+					q++;
+					cout << "\nEnter: \n1. continue\n2. exit\n";
+					cin >> exit;
+					if (exit == 2) break;
+					cin.ignore();
+
+
+
+
+
+				}
+			}
+
+			else {
+				cout << "Invalid command!\n";
+				
+				return;
+			}
+		}
+	}
+}
+
+
