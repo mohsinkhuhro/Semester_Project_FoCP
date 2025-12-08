@@ -42,15 +42,17 @@ void ChooseMode(string topicName[], string& difficulty, string Topics[100][6]) {
 	while (true) {
 		cout << "Select Mode:\n1. Admin\n2. User\n";
 		cin >> x;
+		cin.ignore();
 		if (x == 1) {
 			cout << "Enter password: ";
-			cin >> Enterpassword;
+			getline(cin, Enterpassword);
 			if (Enterpassword == password) {
 				AdminMode(topicName, difficulty, Topics);
 
 			}
 			else {
 				cout << "Wrong password!\n";
+				continue;
 			}
 		}
 		else if (x == 2) {
@@ -71,6 +73,10 @@ void AdminMode(string topicName[], string& difficulty, string Topics[100][6]) {
 		cout << "\ncontinue Admin mode ? > enter: 1\nExit Admin mode ? > enter: 2\n";
 		cin >> exit;
 		if (exit == 2) return;
+		else if (exit != 1) {
+			cout << "Invalid Command!\n";
+			continue;
+		}
 
 		cout << "What you want to do?";
 		cout << "\n1. Add Topic\n2. Remove Topic\n3. Add MCQs to a Topic\n4. view Topics\n5. Exit Admin Mode\n";
@@ -88,6 +94,10 @@ void AdminMode(string topicName[], string& difficulty, string Topics[100][6]) {
 		else if (choose == 5) {
 			return;
 		}
+		else {
+			cout << "Invalid Command!\n";
+			continue;
+		}
 	}
 }
 void Addtopic(string topicName[], string& difficulty, string Topics[100][6]) {
@@ -100,6 +110,10 @@ void Addtopic(string topicName[], string& difficulty, string Topics[100][6]) {
 		cin >> out;
 		if (out == 2) {
 			cout << "You Exit!\n";
+			return;
+		}
+		else if (out != 1) {
+			cout << "Invalid Command!\n";
 			return;
 		}
 		bool Available = false;
@@ -287,6 +301,7 @@ void Addtopic(string topicName[], string& difficulty, string Topics[100][6]) {
 void RemoveTopic() {
 	string Name;
 	int confirm;
+	int exit;
 	
 
 	ifstream outN;
@@ -302,8 +317,12 @@ void RemoveTopic() {
 	string originalTopicName;
 	do {
 		cout << "\nEnter 1 or 2:\n1. continue, Remove Topic\n2. Back to Admin\n";
-		cin >> confirm;
-		if (confirm == 2) return;
+		cin >> exit;
+		if (exit == 2) return;
+		else if (exit != 1) {
+			cout << "Invalid Command!\n";
+			continue;
+		}
 		cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
 		i = 1;
 		while (getline(outN, line)) {
@@ -443,13 +462,17 @@ void AddMcqsToTopic(string topicName[], string& difficulty, string Topics[100][6
 	int level;
 	bool found = false;
 	string Name;
-
+	bool Invalid = true;
+	do {
 	cout << "Enter 1 or 2:\n1. continue Add mcqs to topic\n2. Back to Admin mode \n";
 	cin >> confirm;
 	cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
 
 	if (confirm == 2) return;
-
+	else if (confirm != 1) {
+		cout << "Invalid Command!\n";
+		continue;
+	}
 	ifstream out("topicNames.txt");
 	string line;
 	int i = 1;
@@ -473,7 +496,7 @@ void AddMcqsToTopic(string topicName[], string& difficulty, string Topics[100][6
 
 	if (!found) {
 		cout << "Either topic is not included or Spelling is not Correct!\n";
-		return AddMcqsToTopic(topicName, difficulty, Topics);
+		continue;
 	}
 	else {
 
@@ -484,7 +507,7 @@ void AddMcqsToTopic(string topicName[], string& difficulty, string Topics[100][6
 		cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
 
 		
-		int exit = 1;
+		int exit;
 		if (level == 1) {
 			
 			difficulty = "Easy";
@@ -493,7 +516,7 @@ void AddMcqsToTopic(string topicName[], string& difficulty, string Topics[100][6
 			
 			int q = 0;
 
-			while (q < 100 && exit == 1) {
+			while (true) {
 
 				cout << "Enter question: ";
 				getline(cin, Topics[q][0]);
@@ -523,14 +546,15 @@ void AddMcqsToTopic(string topicName[], string& difficulty, string Topics[100][6
 				outN << "-----------------" << endl;
 
 				q++;
-				cout << "\nEnter 1 or 2: \n1. continue\n2. exit\n";
-				cin >> exit;
+				do {
+					if (exit != 1) cout << "Invalid Move!\n";
+					cout << "\nEnter 1 or 2: \n1. continue entring mcqs\n2. Back\n";
+					cin >> exit;
+					if (exit == 2) break;
+					cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+				} while (exit != 1);
+
 				if (exit == 2) break;
-				cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
-
-
-
-
 
 
 			}
@@ -544,7 +568,7 @@ void AddMcqsToTopic(string topicName[], string& difficulty, string Topics[100][6
 
 			int q = 0;
 
-			while (q < 100 && exit == 1) {
+			while (true) {
 
 				cout << "Enter question: ";
 				getline(cin, Topics[q][0]);
@@ -574,15 +598,18 @@ void AddMcqsToTopic(string topicName[], string& difficulty, string Topics[100][6
 				outN << "-----------------" << endl;
 				q++;
 
-				cout << "\nEnter 1 or 2: \n1. continue\n2. exit\n";
-				cin >> exit;
+				do {
+					if (exit != 1) cout << "Invalid Move!\n";
+					cout << "\nEnter 1 or 2: \n1. continue entring mcqs\n2. Back\n";
+					cin >> exit;
+					if (exit == 2) break;
+					cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+				} while (exit != 1);
+
 				if (exit == 2) break;
-				cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
 
 
-
-
-
+			
 			}
 			outN.close();
 		}
@@ -594,7 +621,7 @@ void AddMcqsToTopic(string topicName[], string& difficulty, string Topics[100][6
 
 			int q = 0;
 
-			while (q < 100 && exit == 1) {
+			while (true) {
 
 				cout << "Enter question: ";
 				getline(cin, Topics[q][0]);
@@ -624,26 +651,29 @@ void AddMcqsToTopic(string topicName[], string& difficulty, string Topics[100][6
 				outN << "-----------------" << endl;
 
 				q++;
-				cout << "\nEnter 1 or 2: \n1. continue\n2. exit\n";
-				cin >> exit;
+				do {
+					if (exit != 1) cout << "Invalid Move!\n";
+					cout << "\nEnter 1 or 2: \n1. continue entring mcqs\n2. Back\n";
+					cin >> exit;
+					if (exit == 2) break;
+					cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+				} while (exit != 1);
+
 				if (exit == 2) break;
-				cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
-
-
-
-
 
 
 			}
+			
 			outN.close();
 		}
 
 		else {
 			cout << "Invalid command!\n";
 
-			return;
+			continue;
 		}
 	}
+  }while (Invalid);
 }
 
 
@@ -652,7 +682,7 @@ void ViewTopicMcqs(string topicName[], string& difficulty, string Topics[100][6]
 	int level;
 	bool found = false;
 	string Name;
-	bool Invalid = false;
+	bool Invalid = true;
 
 	do {
 		cout << "Enter 1 or 2:\n1. continue View topic mcqs\n2. Back to Admin mode\n";
@@ -660,7 +690,10 @@ void ViewTopicMcqs(string topicName[], string& difficulty, string Topics[100][6]
 		cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
 
 		if (confirm == 2) return;
-
+		else if (confirm != 1) {
+			cout << "Invalid Command!\n";
+			continue;
+		}
 		ifstream out("topicNames.txt");
 		string line;
 		int i = 1;
@@ -681,10 +714,10 @@ void ViewTopicMcqs(string topicName[], string& difficulty, string Topics[100][6]
 		while (getline(out, line)) {
 			if (line == Name) found = true;
 		}
-
+		out.close();
 		if (!found) {
 			cout << "Either topic is not included or Spelling is not Correct!\n";
-			Invalid = true;
+			continue;
 		}
 		else {
 
@@ -704,6 +737,7 @@ void ViewTopicMcqs(string topicName[], string& difficulty, string Topics[100][6]
 				outN.open(Name + "Easy.txt");
 				if (!outN.is_open()) {
 					cout << Name << " " << difficulty << " is NOT included!\n";
+					continue;
 				}
 				else {
 
@@ -714,6 +748,7 @@ void ViewTopicMcqs(string topicName[], string& difficulty, string Topics[100][6]
 					outN.close();
 					outN.clear();
 					outN.seekg(0);
+					continue;
 
 				}
 			}
@@ -723,6 +758,7 @@ void ViewTopicMcqs(string topicName[], string& difficulty, string Topics[100][6]
 
 				if (!outN.is_open()) {
 					cout << Name << " " << difficulty << " is NOT included!\n";
+					continue;
 				}
 				else {
 
@@ -732,6 +768,7 @@ void ViewTopicMcqs(string topicName[], string& difficulty, string Topics[100][6]
 					outN.close();
 					outN.clear();
 					outN.seekg(0);
+					continue;
 
 				}
 			}
@@ -741,6 +778,7 @@ void ViewTopicMcqs(string topicName[], string& difficulty, string Topics[100][6]
 
 				if (!outN.is_open()) {
 					cout << Name << " " << difficulty << " is NOT included!\n";
+					continue;
 				}
 				else {
 					while (getline(outN, line)) {
@@ -749,8 +787,13 @@ void ViewTopicMcqs(string topicName[], string& difficulty, string Topics[100][6]
 					outN.close();
 					outN.clear();
 					outN.seekg(0);
+					continue;
 
 				}
+			}
+			else {
+				cout << "Invalid Command!\n";
+				continue;
 			}
 		}
 	} while (Invalid);
