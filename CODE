@@ -6,7 +6,7 @@
 
 using namespace std;
 void ChooseMode(string topicName[], string& difficulty, string Topics[100][6]);
-void AdminMode(string topicName[], string& difficulty,string Topics[100][6]);
+void AdminMode(string topicName[], string& difficulty, string Topics[100][6]);
 void Addtopic(string topicName[], string& difficulty, string Topics[100][6]);
 void RemoveTopic();
 void AddMcqs(string topicName[], string& difficulty, string Topics[100][6]);
@@ -16,27 +16,27 @@ int main() {
 	string topicName[100];
 	string Topics[100][6];
 	string difficulty;
-	string a="";
-	
-	string password="vishal";
-	string Username= " ";
+	string a = "";
+
+	string password = "vishal";
+	string Username = " ";
 	int mode;
-	cout << "___welcome to Quiz generator___\n";
-	ChooseMode(topicName, difficulty, Topics);
-	
-	/*ifstream out("Force and Motion.txt");
+	/*cout << "___welcome to Quiz generator___\n";
+	ChooseMode(topicName, difficulty, Topics);*/
+
+	ifstream out("MathHard.txt");
 	string line;
 
 	while (getline(out, line)) {
 		cout << line << endl;
-	}*/
-	
-	
+	}
+
+
 
 }
 void ChooseMode(string topicName[], string& difficulty, string Topics[100][6]) {
 	int x;
-	string password = "vishal",Enterpassword;
+	string password = "vishal", Enterpassword;
 
 	while (true) {
 		cout << "Select Mode:\n1. Admin\n2. User\n";
@@ -45,8 +45,8 @@ void ChooseMode(string topicName[], string& difficulty, string Topics[100][6]) {
 			cout << "Enter password: ";
 			cin >> Enterpassword;
 			if (Enterpassword == password) {
-			AdminMode(topicName, difficulty, Topics);
-				
+				AdminMode(topicName, difficulty, Topics);
+
 			}
 			else {
 				cout << "Wrong password!\n";
@@ -106,13 +106,13 @@ void Addtopic(string topicName[], string& difficulty, string Topics[100][6]) {
 	if (out == 2) {
 		cout << "You Exit!\n";
 	}
-	
+
 	for (int i = 0; (i < 100) && out == 1; i++) {
 		bool Available = false;
 		cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
 
 		cout << "Enter the Topic name: ";
-		getline(cin , topicName[i]);
+		getline(cin, topicName[i]);
 		ifstream out("topicNames.txt");
 		string line;
 
@@ -128,7 +128,7 @@ void Addtopic(string topicName[], string& difficulty, string Topics[100][6]) {
 		if (!Available) { in << topicName[i] << endl; }
 		in.close();
 
-		
+
 
 		cout << "\nEnter the Difficulty level of Quiz: \n1. Easy\n2. Medium\n3. Hard \n";
 		cin >> level;
@@ -139,7 +139,7 @@ void Addtopic(string topicName[], string& difficulty, string Topics[100][6]) {
 			int exit = 1;
 			difficulty = "Easy";
 			outN.open(topicName[i] + difficulty + ".txt", ios::app);
-			outN  <<difficulty << endl;
+			outN << difficulty << endl;
 			int q = 0;
 
 			while (q < 100 && exit == 1) {
@@ -170,18 +170,18 @@ void Addtopic(string topicName[], string& difficulty, string Topics[100][6]) {
 				outN << "D) " << Topics[q][4] << endl;
 				outN << "Correct: " << Topics[q][5] << endl;
 				outN << "-----------------" << endl;
-				
+
 				q++;
 				cout << "\nEnter: \n1. continue\n2. exit\n";
 				cin >> exit;
 				if (exit == 2) break;
 				cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
 
-				
 
-				
 
-				
+
+
+
 			}
 			outN.close();
 		}
@@ -222,14 +222,14 @@ void Addtopic(string topicName[], string& difficulty, string Topics[100][6]) {
 				outN << "Correct: " << Topics[q][5] << endl;
 				outN << "-----------------" << endl;
 				q++;
-				
+
 				cout << "\nEnter: \n1. continue\n2. exit\n";
 				cin >> exit;
 				if (exit == 2) break;
 				cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
 
-				
-				
+
+
 
 
 			}
@@ -239,7 +239,7 @@ void Addtopic(string topicName[], string& difficulty, string Topics[100][6]) {
 		if (level == 3) {
 			int exit = 1;
 			difficulty = "Hard";
-			outN.open(topicName[i] + difficulty+ ".txt", ios::app);
+			outN.open(topicName[i] + difficulty + ".txt", ios::app);
 			outN << difficulty << endl;
 			int q = 0;
 
@@ -271,16 +271,16 @@ void Addtopic(string topicName[], string& difficulty, string Topics[100][6]) {
 				outN << "D) " << Topics[q][4] << endl;
 				outN << "Correct: " << Topics[q][5] << endl;
 				outN << "-----------------" << endl;
-				
+
 				q++;
 				cout << "\nEnter: \n1. continue\n2. exit\n";
 				cin >> exit;
 				if (exit == 2) break;
 				cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
 
-				
 
-				
+
+
 
 
 			}
@@ -304,7 +304,7 @@ void RemoveTopic() {
 	string line;
 	int i = 1;
 	while (getline(outN, line)) {
-		cout <<i++<<". "<< line << endl;
+		cout << i++ << ". " << line << endl;
 	}
 	outN.close();
 	outN.open("topicNames.txt");
@@ -399,11 +399,10 @@ void AddMcqs(string topicName[], string& difficulty, string Topics[100][6]) {
 	string Name;
 
 	cout << "\ncontinue ? > enter: 1\nBack to Admin mode ? > enter: 2\n";
-	if (confirm == 2) return;	cin >> confirm;
-
+	cin >> confirm;
 	cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
 
-
+	if (confirm == 2) return;
 
 	ifstream out("topicNames.txt");
 	string line;
@@ -418,10 +417,10 @@ void AddMcqs(string topicName[], string& difficulty, string Topics[100][6]) {
 	out.close();
 	out.open("topicNames.txt");
 
-	out.clear();     
-	out.seekg(0);    
+	out.clear();
+	out.seekg(0);
 
-	
+
 	while (getline(out, line)) {
 		if (line == Name) found = true;
 	}
@@ -432,173 +431,173 @@ void AddMcqs(string topicName[], string& difficulty, string Topics[100][6]) {
 	}
 	else {
 
-			ofstream outN;
+		ofstream outN;
 
-			cout << "Enter the Difficulty level of topic: \n1. Easy\n2. Medium\n3. Hard \n";
-			cin >> level;
-			cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
-
-
-			if (level == 1) {
-				int exit = 1;
-				difficulty = "Easy";
-				outN.open(Name + difficulty+ ".txt", ios::app);
-
-				
-				int q = 0;
-
-				while (q < 100 && exit == 1) {
-
-					cout << "Enter question: ";
-					getline(cin, Topics[q][0]);
-
-					cout << "Option A: ";
-					getline(cin, Topics[q][1]);
-
-					cout << "Option B: ";
-					getline(cin, Topics[q][2]);
-
-					cout << "Option C: ";
-					getline(cin, Topics[q][3]);
-
-					cout << "Option D: ";
-					getline(cin, Topics[q][4]);
-
-					cout << "Correct option: ";
-					getline(cin, Topics[q][5]);
-
-					// Write all to file
-					outN << "Q: " << Topics[q][0] << endl;
-					outN << "A) " << Topics[q][1] << endl;
-					outN << "B) " << Topics[q][2] << endl;
-					outN << "C) " << Topics[q][3] << endl;
-					outN << "D) " << Topics[q][4] << endl;
-					outN << "Correct: " << Topics[q][5] << endl;
-					outN << "-----------------" << endl;
-					
-					q++;
-					cout << "\nEnter: \n1. continue\n2. exit\n";
-					cin >> exit;
-					if (exit == 2) break;
-					cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+		cout << "Enter the Difficulty level of topic: \n1. Easy\n2. Medium\n3. Hard \n";
+		cin >> level;
+		cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
 
 
+		if (level == 1) {
+			int exit = 1;
+			difficulty = "Easy";
+			outN.open(Name + difficulty + ".txt", ios::app);
+
+
+			int q = 0;
+
+			while (q < 100 && exit == 1) {
+
+				cout << "Enter question: ";
+				getline(cin, Topics[q][0]);
+
+				cout << "Option A: ";
+				getline(cin, Topics[q][1]);
+
+				cout << "Option B: ";
+				getline(cin, Topics[q][2]);
+
+				cout << "Option C: ";
+				getline(cin, Topics[q][3]);
+
+				cout << "Option D: ";
+				getline(cin, Topics[q][4]);
+
+				cout << "Correct option: ";
+				getline(cin, Topics[q][5]);
+
+				// Write all to file
+				outN << "Q: " << Topics[q][0] << endl;
+				outN << "A) " << Topics[q][1] << endl;
+				outN << "B) " << Topics[q][2] << endl;
+				outN << "C) " << Topics[q][3] << endl;
+				outN << "D) " << Topics[q][4] << endl;
+				outN << "Correct: " << Topics[q][5] << endl;
+				outN << "-----------------" << endl;
+
+				q++;
+				cout << "\nEnter: \n1. continue\n2. exit\n";
+				cin >> exit;
+				if (exit == 2) break;
+				cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
 
 
 
 
-				}
-				outN.close();
+
+
 			}
+			outN.close();
+		}
 
-			else if (level == 2) {
-				int exit = 1;
-				difficulty = "Medium";
-				outN.open(Name + difficulty + ".txt", ios::app);
-				
-				int q = 0;
+		else if (level == 2) {
+			int exit = 1;
+			difficulty = "Medium";
+			outN.open(Name + difficulty + ".txt", ios::app);
 
-				while (q < 100 && exit == 1) {
+			int q = 0;
 
-					cout << "Enter question: ";
-					getline(cin, Topics[q][0]);
+			while (q < 100 && exit == 1) {
 
-					cout << "Option A: ";
-					getline(cin, Topics[q][1]);
+				cout << "Enter question: ";
+				getline(cin, Topics[q][0]);
 
-					cout << "Option B: ";
-					getline(cin, Topics[q][2]);
+				cout << "Option A: ";
+				getline(cin, Topics[q][1]);
 
-					cout << "Option C: ";
-					getline(cin, Topics[q][3]);
+				cout << "Option B: ";
+				getline(cin, Topics[q][2]);
 
-					cout << "Option D: ";
-					getline(cin, Topics[q][4]);
+				cout << "Option C: ";
+				getline(cin, Topics[q][3]);
 
-					cout << "Correct option: ";
-					getline(cin, Topics[q][5]);
+				cout << "Option D: ";
+				getline(cin, Topics[q][4]);
 
-					// Write all to file
-					outN << "Q: " << Topics[q][0] << endl;
-					outN << "A) " << Topics[q][1] << endl;
-					outN << "B) " << Topics[q][2] << endl;
-					outN << "C) " << Topics[q][3] << endl;
-					outN << "D) " << Topics[q][4] << endl;
-					outN << "Correct: " << Topics[q][5] << endl;
-					outN << "-----------------" << endl;
-					q++;
-					
-					cout << "\nEnter: \n1. continue\n2. exit\n";
-					cin >> exit;
-					if (exit == 2) break;
-					cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+				cout << "Correct option: ";
+				getline(cin, Topics[q][5]);
 
+				// Write all to file
+				outN << "Q: " << Topics[q][0] << endl;
+				outN << "A) " << Topics[q][1] << endl;
+				outN << "B) " << Topics[q][2] << endl;
+				outN << "C) " << Topics[q][3] << endl;
+				outN << "D) " << Topics[q][4] << endl;
+				outN << "Correct: " << Topics[q][5] << endl;
+				outN << "-----------------" << endl;
+				q++;
 
+				cout << "\nEnter: \n1. continue\n2. exit\n";
+				cin >> exit;
+				if (exit == 2) break;
+				cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
 
 
 
-				}
-				outN.close();
+
+
 			}
+			outN.close();
+		}
 
-			else if (level == 3) {
-				int exit = 1;
-				difficulty = "Hard";
-				outN.open(Name + difficulty + ".txt", ios::app);
-				
-				int q = 0;
+		else if (level == 3) {
+			int exit = 1;
+			difficulty = "Hard";
+			outN.open(Name + difficulty + ".txt", ios::app);
 
-				while (q < 100 && exit == 1) {
+			int q = 0;
 
-					cout << "Enter question: ";
-					getline(cin, Topics[q][0]);
+			while (q < 100 && exit == 1) {
 
-					cout << "Option A: ";
-					getline(cin, Topics[q][1]);
+				cout << "Enter question: ";
+				getline(cin, Topics[q][0]);
 
-					cout << "Option B: ";
-					getline(cin, Topics[q][2]);
+				cout << "Option A: ";
+				getline(cin, Topics[q][1]);
 
-					cout << "Option C: ";
-					getline(cin, Topics[q][3]);
+				cout << "Option B: ";
+				getline(cin, Topics[q][2]);
 
-					cout << "Option D: ";
-					getline(cin, Topics[q][4]);
+				cout << "Option C: ";
+				getline(cin, Topics[q][3]);
 
-					cout << "Correct option: ";
-					getline(cin, Topics[q][5]);
+				cout << "Option D: ";
+				getline(cin, Topics[q][4]);
 
-					// Write all to file
-					outN << "Q: " << Topics[q][0] << endl;
-					outN << "A) " << Topics[q][1] << endl;
-					outN << "B) " << Topics[q][2] << endl;
-					outN << "C) " << Topics[q][3] << endl;
-					outN << "D) " << Topics[q][4] << endl;
-					outN << "Correct: " << Topics[q][5] << endl;
-					outN << "-----------------" << endl;
-					
-					q++;
-					cout << "\nEnter: \n1. continue\n2. exit\n";
-					cin >> exit;
-					if (exit == 2) break;
-					cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+				cout << "Correct option: ";
+				getline(cin, Topics[q][5]);
 
+				// Write all to file
+				outN << "Q: " << Topics[q][0] << endl;
+				outN << "A) " << Topics[q][1] << endl;
+				outN << "B) " << Topics[q][2] << endl;
+				outN << "C) " << Topics[q][3] << endl;
+				outN << "D) " << Topics[q][4] << endl;
+				outN << "Correct: " << Topics[q][5] << endl;
+				outN << "-----------------" << endl;
 
-
-
+				q++;
+				cout << "\nEnter: \n1. continue\n2. exit\n";
+				cin >> exit;
+				if (exit == 2) break;
+				cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
 
 
-				}
-				outN.close();
+
+
+
+
 			}
+			outN.close();
+		}
 
-			else {
-				cout << "Invalid command!\n";
-				
-				return;
-			}
+		else {
+			cout << "Invalid command!\n";
+
+			return;
 		}
 	}
+}
 
 
 
