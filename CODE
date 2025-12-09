@@ -14,472 +14,519 @@ void ViewTopicMcqs(string topicName[], string& difficulty, string Topics[][6]);
 
 
 int main() {
-        string topicName[100];
-        string Topics[1000][6];
-        string difficulty;
-        string a = "";
+    string topicName[100];
+    string Topics[1000][6];
+    string difficulty;
+    string a = "";
 
-        string password = "vishal";
-        string Username = " ";
-        int mode;
-        cout << "___welcome to Quiz generator___\n";
-        ChooseMode(topicName, difficulty, Topics);
+    string password = "vishal";
+    string Username = " ";
+    int mode;
+    cout << "___welcome to Quiz generator___\n";
+    ChooseMode(topicName, difficulty, Topics);
 
-        /*ifstream out("ChemMedium.txt");
-        string line;
+    /*ifstream out("ChemMedium.txt");
+    string line;
 
-        while (getline(out, line)) {
-                cout << line << endl;
-        }*/
+    while (getline(out, line)) {
+            cout << line << endl;
+    }*/
 
 
 
 }
 void ChooseMode(string topicName[], string& difficulty, string Topics[100][6]) {
-        string x;
-        string password = "vishal", Enterpassword;
+    string x;
+    string password = "vishal", Enterpassword;
 
-        while (true) {
-                cout << "Select Mode:\n1. Admin\n2. User\n";
-                cin >> x;
-                cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
-                if (x == "1") {
-                        cout << "Enter password: ";
-                        getline(cin, Enterpassword);
-                        if (Enterpassword == password) {
-                                AdminMode(topicName, difficulty, Topics);
+    while (true) {
+        cout << "Select Mode:\n1. Admin\n2. User\n";
+        cin >> x;
+        cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+        if (x == "1") {
+            cout << "Enter password: ";
+            getline(cin, Enterpassword);
+            if (Enterpassword == password) {
+                AdminMode(topicName, difficulty, Topics);
 
-                        }
-                        else {
-                                cout << "Wrong password!\n";
-                                continue;
-                        }
-                }
-                else if (x == "2") {
-                        cout << "Enter Username: ";
-                        return;
-                }
-                else {
-                        cout << "Invalid command!\nenter 1 or 2\n";
-                        cin.clear();
-                }
+            }
+            else {
+                cout << "Wrong password!\n";
+                continue;
+            }
         }
+        else if (x == "2") {
+            cout << "Enter Username: ";
+            return;
+        }
+        else {
+            cout << "Invalid command!\nenter 1 or 2\n";
+            cin.clear();
+        }
+    }
 }
 
 
 void AdminMode(string topicName[], string& difficulty, string Topics[100][6]) {
-        string choose;
-        string exit;
-        while (true) {
-                cout << "\ncontinue Admin mode ? > enter: 1\nExit Admin mode ? > enter: 2\n";
-                cin >> exit;
-                if (exit == "2") return;
-                else if (exit != "1") {
-                        cout << "Invalid Command!\n";
-                        continue;
-                }
-
-                cout << "What you want to do?";
-                cout << "\n1. Add Topic\n2. Remove Topic\n3. Add MCQs to a Topic\n4. view Topics\n5. Exit Admin Mode\n";
-                cin >> choose;
-                if (choose == "1") {
-                        AddNewTopic(topicName, difficulty, Topics);
-                }
-                else if (choose == "2") RemoveTopic();
-
-                else if (choose == "3") AddMcqsToTopic(topicName, difficulty, Topics);
-
-                else if (choose == "4") {
-                        ViewTopicMcqs(topicName, difficulty, Topics);
-                }
-                else if (choose == "5") {
-                        return;
-                }
-                else {
-                        cout << "Invalid Command!\n";
-                        continue;
-                }
+    string choose;
+    string exit;
+    while (true) {
+        cout << "\ncontinue Admin mode ? > enter: 1\nExit Admin mode ? > enter: 2\n";
+        cin >> exit;
+        if (exit == "2") return;
+        else if (exit != "1") {
+            cout << "Invalid Command!\n";
+            continue;
         }
+
+        cout << "What you want to do?";
+        cout << "\n1. Add Topic\n2. Remove Topic\n3. Add MCQs to a Topic\n4. view Topics\n5. Exit Admin Mode\n";
+        cin >> choose;
+        if (choose == "1") {
+            AddNewTopic(topicName, difficulty, Topics);
+        }
+        else if (choose == "2") RemoveTopic();
+
+        else if (choose == "3") AddMcqsToTopic(topicName, difficulty, Topics);
+
+        else if (choose == "4") {
+            ViewTopicMcqs(topicName, difficulty, Topics);
+        }
+        else if (choose == "5") {
+            return;
+        }
+        else {
+            cout << "Invalid Command!\n";
+            continue;
+        }
+    }
 }
 void AddNewTopic(string topicName[], string& difficulty, string Topics[100][6]) {
+    
+    string out = "1", level;
+
+
+    for (int i = 0; (i < 100); i++) {
+        cout << "Enter 1 or 2: \n1. continue, enter new topic\n2. Back to Admin\n ";
+        cin >> out;
+        if (out == "2") {
+            cout << "You Exit Add New topics\n";
+            return;
+        }
+        else if (out != "1") {
+            cout << "Invalid Command!\n";
+            continue;
+        }
+        bool Available = false;
+        cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+
+        cout << "Enter the Topic name: ";
+        getline(cin, topicName[i]);
+        ifstream out("topicNames.txt");
+        string line;
+
+        while (getline(out, line)) {
+            if (topicName[i] == line) {
+                Available = true;
+            }
+        }
+        out.close();
+
+        ofstream in("topicNames.txt", ios::app);
+
+        if (!Available) { in << topicName[i] << endl; }
+        in.close();
+        string Name = topicName[i];
         ofstream outN;
-        string out = "1", level;
+        ifstream inN;
 
 
-        for (int i = 0; (i < 100); i++) {
-                cout << "Enter 1 or 2: \n1. continue, enter new topic\n2. Back to Admin\n ";
-                cin >> out;
-                if (out == "2") {
-                        cout << "You Exit Add New topics\n";
-                        return;
-                }
-                else if (out != "1") {
+        cout << "\nEnter the Difficulty level of Quiz: \n1. Easy\n2. Medium\n3. Hard \n";
+        cin >> level;
+        cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+
+
+        if (level == "1") {
+            string exit = "1";
+            difficulty = "Easy";
+            outN.open(Name + difficulty + ".txt", ios::app);
+            inN.open(Name + difficulty + ".txt", ios::app);
+
+            if (inN.peek() == ifstream::traits_type::eof()) {
+                outN << difficulty << endl;
+            }
+            int q = 0;
+
+            while (q < 1000 && exit == "1") {
+
+                cout << "Enter question: ";
+                getline(cin, Topics[q][0]);
+
+                cout << "Option A: ";
+                getline(cin, Topics[q][1]);
+
+                cout << "Option B: ";
+                getline(cin, Topics[q][2]);
+
+                cout << "Option C: ";
+                getline(cin, Topics[q][3]);
+
+                cout << "Option D: ";
+                getline(cin, Topics[q][4]);
+
+                cout << "Correct option: ";
+                getline(cin, Topics[q][5]);
+
+                // Write all to file
+                outN << "Q: " << Topics[q][0] << endl;
+                outN << "A) " << Topics[q][1] << endl;
+                outN << "B) " << Topics[q][2] << endl;
+                outN << "C) " << Topics[q][3] << endl;
+                outN << "D) " << Topics[q][4] << endl;
+                outN << "Correct: " << Topics[q][5] << endl;
+                outN << "-----------------" << endl;
+
+                q++;
+                while (true) {
+                    cout << "\nEnter 1 or 2 \n1. continue, entring mcqs\n2. Back\n";
+                    cin >> exit;
+               
+                    if (exit == "2" || exit == "1") break;
+                    else if (exit != "1") {
                         cout << "Invalid Command!\n";
                         continue;
+                    }
                 }
-                bool Available = false;
-                cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
-
-                cout << "Enter the Topic name: ";
-                getline(cin, topicName[i]);
-                ifstream out("topicNames.txt");
-                string line;
-
-                while (getline(out, line)) {
-                        if (topicName[i] == line) {
-                                Available = true;
-                        }
-                }
-                out.close();
-
-                ofstream in("topicNames.txt", ios::app);
-
-                if (!Available) { in << topicName[i] << endl; }
-                in.close();
-
-
-
-                cout << "\nEnter the Difficulty level of Quiz: \n1. Easy\n2. Medium\n3. Hard \n";
-                cin >> level;
+                if (exit == "2") break;
                 cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
 
 
-                if (level == "1") {
-                        string exit = "1";
-                        difficulty = "Easy";
-                        outN.open(topicName[i] + difficulty + ".txt", ios::app);
-                        outN << difficulty << endl;
-                        int q = 0;
-
-                        while (q < 1000 && exit == "1") {
-
-                                cout << "Enter question: ";
-                                getline(cin, Topics[q][0]);
-
-                                cout << "Option A: ";
-                                getline(cin, Topics[q][1]);
-
-                                cout << "Option B: ";
-                                getline(cin, Topics[q][2]);
-
-                                cout << "Option C: ";
-                                getline(cin, Topics[q][3]);
-
-                                cout << "Option D: ";
-                                getline(cin, Topics[q][4]);
-
-                                cout << "Correct option: ";
-                                getline(cin, Topics[q][5]);
-
-                                // Write all to file
-                                outN << "Q: " << Topics[q][0] << endl;
-                                outN << "A) " << Topics[q][1] << endl;
-                                outN << "B) " << Topics[q][2] << endl;
-                                outN << "C) " << Topics[q][3] << endl;
-                                outN << "D) " << Topics[q][4] << endl;
-                                outN << "Correct: " << Topics[q][5] << endl;
-                                outN << "-----------------" << endl;
-
-                                q++;
-                                cout << "\nEnter 1 or 2 \n1. continue, entring mcqs\n2. Back\n";
-                                cin >> exit;
-                                if (exit == "2") break;
-                                cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
 
 
 
 
-
-
-                        }
-                        outN.close();
-                }
-
-                if (level == "2") {
-                         string exit = "1";
-                        difficulty = "Medium";
-                        outN.open(topicName[i] + difficulty + ".txt", ios::app);
-                        outN << difficulty << endl;
-                        int q = 0;
-
-                        while (q < 1000 && exit == "1") {
-
-                                cout << "Enter question: ";
-                                getline(cin, Topics[q][0]);
-
-                                cout << "Option A: ";
-                                getline(cin, Topics[q][1]);
-
-                                cout << "Option B: ";
-                                getline(cin, Topics[q][2]);
-
-                                cout << "Option C: ";
-                                getline(cin, Topics[q][3]);
-
-                                cout << "Option D: ";
-                                getline(cin, Topics[q][4]);
-
-                                cout << "Correct option: ";
-                                getline(cin, Topics[q][5]);
-
-                                // Write all to file
-                                outN << "Q: " << Topics[q][0] << endl;
-                                outN << "A) " << Topics[q][1] << endl;
-                                outN << "B) " << Topics[q][2] << endl;
-                                outN << "C) " << Topics[q][3] << endl;
-                                outN << "D) " << Topics[q][4] << endl;
-                                outN << "Correct: " << Topics[q][5] << endl;
-                                outN << "-----------------" << endl;
-                                q++;
-
-                                cout << "\nEnter 1 or 2 \n1. continue, entring mcqs\n2. Back\n";
-                                cin >> exit;
-                                if (exit == "2") break;
-                                cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
-
-
-
-
-
-                        }
-                        outN.close();
-                }
-
-                if (level == "3") {
-                        string exit = "1";
-                        difficulty = "Hard";
-                        outN.open(topicName[i] + difficulty + ".txt", ios::app);
-                        outN << difficulty << endl;
-                        int q = 0;
-
-                        while (q < 1000 && exit == "1") {
-
-                                cout << "Enter question: ";
-                                getline(cin, Topics[q][0]);
-
-                                cout << "Option A: ";
-                                getline(cin, Topics[q][1]);
-
-                                cout << "Option B: ";
-                                getline(cin, Topics[q][2]);
-
-                                cout << "Option C: ";
-                                getline(cin, Topics[q][3]);
-
-                                cout << "Option D: ";
-                                getline(cin, Topics[q][4]);
-
-                                cout << "Correct option: ";
-                                getline(cin, Topics[q][5]);
-
-                                // Write all to file
-                                outN << "Q: " << Topics[q][0] << endl;
-                                outN << "A) " << Topics[q][1] << endl;
-                                outN << "B) " << Topics[q][2] << endl;
-                                outN << "C) " << Topics[q][3] << endl;
-                                outN << "D) " << Topics[q][4] << endl;
-                                outN << "Correct: " << Topics[q][5] << endl;
-                                outN << "-----------------" << endl;
-
-                                q++;
-                                cout << "\nEnter 1 or 2 \n1. continue, entring mcqs\n2. Back\n";
-                                cin >> exit;
-                                if (exit == "2") break;
-                                cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
-
-
-
-
-
-
-                        }
-                        outN.close();
-                }
+            }
+            outN.close();
         }
+
+        if (level == "2") {
+            string exit = "1";
+            difficulty = "Medium";
+            outN.open(Name + difficulty + ".txt", ios::app);
+            inN.open(Name + difficulty + ".txt", ios::app);
+
+            if (inN.peek() == ifstream::traits_type::eof()) {
+                outN << difficulty << endl;
+            }
+            int q = 0;
+
+            while (q < 1000 && exit == "1") {
+
+                cout << "Enter question: ";
+                getline(cin, Topics[q][0]);
+
+                cout << "Option A: ";
+                getline(cin, Topics[q][1]);
+
+                cout << "Option B: ";
+                getline(cin, Topics[q][2]);
+
+                cout << "Option C: ";
+                getline(cin, Topics[q][3]);
+
+                cout << "Option D: ";
+                getline(cin, Topics[q][4]);
+
+                cout << "Correct option: ";
+                getline(cin, Topics[q][5]);
+
+                // Write all to file
+                outN << "Q: " << Topics[q][0] << endl;
+                outN << "A) " << Topics[q][1] << endl;
+                outN << "B) " << Topics[q][2] << endl;
+                outN << "C) " << Topics[q][3] << endl;
+                outN << "D) " << Topics[q][4] << endl;
+                outN << "Correct: " << Topics[q][5] << endl;
+                outN << "-----------------" << endl;
+                q++;
+
+                while (true) {
+                    cout << "\nEnter 1 or 2 \n1. continue, entring mcqs\n2. Back\n";
+                    cin >> exit;
+
+                    if (exit == "2" || exit == "1") break;
+                    else if (exit != "1") {
+                        cout << "Invalid Command!\n";
+                        continue;
+                    }
+                }
+                if (exit == "2") break;
+                cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+
+
+
+
+
+            }
+            outN.close();
+        }
+
+        if (level == "3") {
+            string exit = "1";
+            difficulty = "Hard";
+            outN.open(Name + difficulty + ".txt", ios::app);
+            inN.open(Name + difficulty + ".txt", ios::app);
+
+            if (inN.peek() == ifstream::traits_type::eof()) {
+                outN << difficulty << endl;
+            }
+
+            int q = 0;
+
+            while (q < 1000 && exit == "1") {
+
+                cout << "Enter question: ";
+                getline(cin, Topics[q][0]);
+
+                cout << "Option A: ";
+                getline(cin, Topics[q][1]);
+
+                cout << "Option B: ";
+                getline(cin, Topics[q][2]);
+
+                cout << "Option C: ";
+                getline(cin, Topics[q][3]);
+
+                cout << "Option D: ";
+                getline(cin, Topics[q][4]);
+
+                cout << "Correct option: ";
+                getline(cin, Topics[q][5]);
+
+                // Write all to file
+                outN << "Q: " << Topics[q][0] << endl;
+                outN << "A) " << Topics[q][1] << endl;
+                outN << "B) " << Topics[q][2] << endl;
+                outN << "C) " << Topics[q][3] << endl;
+                outN << "D) " << Topics[q][4] << endl;
+                outN << "Correct: " << Topics[q][5] << endl;
+                outN << "-----------------" << endl;
+
+                q++;
+                
+                while (true) {
+                    cout << "\nEnter 1 or 2 \n1. continue, entring mcqs\n2. Back\n";
+                    cin >> exit;
+                    if (exit == "2" || exit=="1") break;
+                    else if (exit != "1") {
+                        cout << "Invalid Command!\n";
+                        continue;
+                    }
+                }
+                if (exit == "2") break;
+                cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+
+
+
+
+
+
+            }
+            outN.close();
+        }
+    }
 }
 
 
 void RemoveTopic() {
-        string Name;
-        string confirm;
-        string exit;
+    string Name;
+    string confirm;
+    string exit;
 
-        bool Invalid = true;
-        string level;
-        bool found;
-        bool removeComp;
-        string originalTopicName;
-        do {
-                cout << "\nEnter 1 or 2:\n1. continue, Remove Topic\n2. Back to Admin\n";
-                cin >> exit;
-                if (exit == "2") return;
-                else if (exit != "1") {
-                        cout << "Invalid Command!\n";
-                        continue;
-                }
+    bool Invalid = true;
+    string level;
+    bool found;
+    bool removeComp;
+    string originalTopicName;
+    do {
+        cout << "\nEnter 1 or 2:\n1. continue, Remove Topic\n2. Back to Admin\n";
+        cin >> exit;
+        if (exit == "2") return;
+        else if (exit != "1") {
+            cout << "Invalid Command!\n";
+            continue;
+        }
+        cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+
+        string line;
+        ifstream outN;
+        ofstream in("temp.txt");
+        outN.open("topicNames.txt", ios::in);
+
+        while (getline(outN, line)) {
+            cout << "=> " << line << endl;
+        }
+        outN.close();
+        outN.open("topicNames.txt");
+        outN.clear();
+        outN.seekg(0);
+
+        cout << "\nEnter the topic which you want to remove: ";
+        getline(cin, Name);
+        found = false;
+        removeComp = false;
+        originalTopicName = Name;
+
+        while (getline(outN, line)) {
+            if (originalTopicName == line) {
+                found = true;
+            }
+            else { in << line << endl; }
+        }
+            while (found){
+
+                cout << "\nEnter the Difficulty level of Topic: \n1. Easy\n2. Medium\n3. Hard \n4. Whole topic\n";
+                cin >> level;
                 cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+                if (level == "1") {
+                    originalTopicName += "Easy";
+                    cout << "Remove " << originalTopicName << " ?\n1. Yes\n2. NO\nEnter 1 or 2: ";
+                    cin >> confirm;
 
-                string line;
-                ifstream outN;
-                ofstream in("temp.txt");
-                outN.open("topicNames.txt", ios::in);
-
-                while (getline(outN, line)) {
-                        cout <<"=> " << line << endl;
-                }
-                outN.close();
-                outN.open("topicNames.txt");
-                outN.clear();
-                outN.seekg(0);
-
-                cout << "\nEnter the topic which you want to remove: ";
-                getline(cin, Name);
-                found = false;
-                removeComp = false;
-                originalTopicName = Name;
-
-                while (getline(outN, line)) {
-                        if (originalTopicName == line) {
-                                found = true;
-                                cout << "\nEnter the Difficulty level of Topic: \n1. Easy\n2. Medium\n3. Hard \n4. Whole topic\n";
-                                cin >> level;
-                                cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
-                                if (level == "1") {
-                                        originalTopicName += "Easy";
-                                        cout << "Remove " << originalTopicName << " ?\n1. Yes\n2. NO\nEnter 1 or 2: ";
-                                        cin >> confirm;
-                                        
-                                        if (confirm == "1") {
+                    if (confirm == "1") {
 
 
-                                                if (remove((originalTopicName + ".txt").c_str()) == 0) {
+                        if (remove((originalTopicName + ".txt").c_str()) == 0) {
 
-                                                        cout << originalTopicName << " Removed!\n";
-                                                        break;
-                                                }
-                                                else {
-                                                        cout << originalTopicName << " Is NOT Available!\n";
-                                                        break;
-                                                }
-
-                                        }
-                                        else {
-                                                break;
-                                        }
-                                }
-                                if (level == "2") {
-                                        originalTopicName += "Medium";
-                                        cout << "Remove " << originalTopicName << " ?\n1. Yes\n2. NO\nEnter 1 or 2: ";
-                                        cin >> confirm;
-                                        
-                                        if (confirm == "1") {
-
-
-                                                if (remove((originalTopicName + ".txt").c_str()) == 0) {
-
-                                                        cout << originalTopicName << " Removed!\n";
-                                                        break;
-                                                }
-                                                else {
-                                                        cout << originalTopicName << " Is NOT Available!\n";
-                                                        break;
-                                                }
-
-                                        }
-
-
-
-                                        else {
-                                                break;
-                                        }
-                                }
-                                if (level == "3") {
-                                        originalTopicName += "Hard";
-                                        cout << "Remove " << originalTopicName << " ?\n1. Yes\n2. NO\nEnter 1 or 2: ";
-                                        cin >> confirm;
-                                        
-                                        if (confirm == "1") {
-
-
-                                                if (remove((originalTopicName + ".txt").c_str()) == 0) {
-
-                                                        cout << originalTopicName << " Removed!\n";
-                                                        break;
-                                                }
-                                                else {
-                                                        cout << originalTopicName << " Is NOT Available!\n";
-                                                        break;
-
-                                                }
-
-
-
-                                        }
-                                        else {
-                                                break;
-                                        }
-                                }
-                                if (level == "4") {
-                                        originalTopicName += "All";
-                                        cout << "Remove " << originalTopicName << " ?\n1. Yes\n2. NO\nEnter 1 or 2: ";
-                                        cin >> confirm;
-                                        found = true;
-                                        if (confirm == "1") {
-
-                                                remove((originalTopicName + "Easy.txt").c_str());
-                                                remove((originalTopicName + "Medium.txt").c_str());
-                                                remove((originalTopicName + "Hard.txt").c_str());
-                                                removeComp = true;
-                                                cout << originalTopicName << " Removed!\n";
-                                                break;
-
-                                        }
-                                        else {
-                                                break;
-                                        }
-                                }
+                            cout << originalTopicName << " Removed!\n";
+                            break;
                         }
-                        else { in << line << endl; } // for removig topic from topicname file
+                        else {
+                            cout << originalTopicName << " Is NOT Available!\n";
+                            break;
+                        }
 
+                    }
+                    else {
+                        break;
+                    }
                 }
-                outN.close();
-                in.close();
-                outN.close();
-                if (removeComp) {
-                        remove("topicNames.txt");
-                        rename("temp.txt", "topicNames.txt");
+                if (level == "2") {
+                    originalTopicName += "Medium";
+                    cout << "Remove " << originalTopicName << " ?\n1. Yes\n2. NO\nEnter 1 or 2: ";
+                    cin >> confirm;
+
+                    if (confirm == "1") {
+
+
+                        if (remove((originalTopicName + ".txt").c_str()) == 0) {
+
+                            cout << originalTopicName << " Removed!\n";
+                            break;
+                        }
+                        else {
+                            cout << originalTopicName << " Is NOT Available!\n";
+                            break;
+                        }
+
+                    }
+
+
+
+                    else {
+                        break;
+                    }
                 }
-                if (!found) {
-                        cout << "Either topic is not included or Spelling is not Correct!\n";
-                        continue;
+                if (level == "3") {
+                    originalTopicName += "Hard";
+                    cout << "Remove " << originalTopicName << " ?\n1. Yes\n2. NO\nEnter 1 or 2: ";
+                    cin >> confirm;
+
+                    if (confirm == "1") {
+
+
+                        if (remove((originalTopicName + ".txt").c_str()) == 0) {
+
+                            cout << originalTopicName << " Removed!\n";
+                            break;
+                        }
+                        else {
+                            cout << originalTopicName << " Is NOT Available!\n";
+                            break;
+
+                        }
+
+
+
+                    }
+                    else {
+                        break;
+                    }
                 }
-        }while (Invalid);
+                if (level == "4") {
+                    originalTopicName += "All";
+                    cout << "Remove " << originalTopicName << " ?\n1. Yes\n2. NO\nEnter 1 or 2: ";
+                    cin >> confirm;
+                    found = true;
+                    if (confirm == "1") {
+
+                        remove((originalTopicName + "Easy.txt").c_str());
+                        remove((originalTopicName + "Medium.txt").c_str());
+                        remove((originalTopicName + "Hard.txt").c_str());
+                        removeComp = true;
+                        cout << originalTopicName << " Removed!\n";
+                        break;
+
+                    }
+                    else {
+                        break;
+                    }
+                }
+                else {
+                    cout << "Invalid Command!\n";
+                }
+            }
+        // for removig topic from topicname file
+
+     
+        outN.close();
+        in.close();
+        outN.close();
+        if (removeComp) {
+            remove("topicNames.txt");
+            rename("temp.txt", "topicNames.txt");
+        }
+        if (!found) {
+            cout << "Either topic is not included or Spelling is not Correct!\n";
+            continue;
+        }
+    } while (Invalid);
 
 }
 
 void AddMcqsToTopic(string topicName[], string& difficulty, string Topics[100][6]) {
-        string confirm;
-        string level;
-        bool found = false;
-        int q;
-        string exit = "1";
-        string Name;
-        bool Invalid = true;
-        do {
+    string confirm;
+    string level;
+    bool found = false;
+    int q;
+    string exit = "1";
+    string Name;
+    bool Invalid = true;
+    do {
         cout << "Enter 1 or 2:\n1. continue Add mcqs to topic\n2. Back to Admin mode \n";
         cin >> confirm;
         cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
 
         if (confirm == "2") return;
         else if (confirm != "1") {
-                cout << "Invalid Command!\n";
-                continue;
+            cout << "Invalid Command!\n";
+            continue;
         }
         ifstream out("topicNames.txt");
         string line;
         int i = 1;
         while (getline(out, line)) {
-                cout <<"=> "<< line << endl;
+            cout << "=> " << line << endl;
         }
 
 
@@ -494,335 +541,335 @@ void AddMcqsToTopic(string topicName[], string& difficulty, string Topics[100][6
 
 
         while (getline(out, line)) {
-                if (line == Name) found = true;
+            if (line == Name) found = true;
         }
         out.close();
 
         if (!found) {
-                cout << "Either topic is not included or Spelling is not Correct!\n";
-                continue;
+            cout << "Either topic is not included or Spelling is not Correct!\n";
+            continue;
         }
         else {
 
-                ofstream outN;
-                ifstream in;
-                cout << "Enter the Difficulty level of topic: \n1. Easy\n2. Medium\n3. Hard \n";
-                cin >> level;
-                cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+            ofstream outN;
+            ifstream in;
+            cout << "Enter the Difficulty level of topic: \n1. Easy\n2. Medium\n3. Hard \n";
+            cin >> level;
+            cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
 
 
 
-                if (level == "1") {
+            if (level == "1") {
 
-                        difficulty = "Easy";
-                        outN.open(Name + difficulty + ".txt", ios::app);
-                        in.open(Name + difficulty + ".txt", ios::app);
+                difficulty = "Easy";
+                outN.open(Name + difficulty + ".txt", ios::app);
+                in.open(Name + difficulty + ".txt", ios::app);
 
-                        if (in.peek() == ifstream::traits_type::eof()) {
-                                outN << difficulty << endl;
-                        }
-
-                         q = 0;
-
-                        while (true) {
-
-                                cout << "Enter question: ";
-                                getline(cin, Topics[q][0]);
-
-                                cout << "Option A: ";
-                                getline(cin, Topics[q][1]);
-
-                                cout << "Option B: ";
-                                getline(cin, Topics[q][2]);
-
-                                cout << "Option C: ";
-                                getline(cin, Topics[q][3]);
-
-                                cout << "Option D: ";
-                                getline(cin, Topics[q][4]);
-
-                                cout << "Correct option: ";
-                                getline(cin, Topics[q][5]);
-
-                                // Write all to file
-                                outN << "Q: " << Topics[q][0] << endl;
-                                outN << "A) " << Topics[q][1] << endl;
-                                outN << "B) " << Topics[q][2] << endl;
-                                outN << "C) " << Topics[q][3] << endl;
-                                outN << "D) " << Topics[q][4] << endl;
-                                outN << "Correct: " << Topics[q][5] << endl;
-                                outN << "-----------------" << endl;
-
-                                q++;
-                                do {
-                                        cout << "\nEnter 1 or 2: \n1. continue entring mcqs\n2. Back\n";
-                                        cin >> exit;
-                                        if (exit == "2") break;
-                                        if (exit != "1") cout << "Invalid Move!\n";
-
-                                        cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
-                                } while (exit != "1");
-
-                                if (exit == "2") break;
-
-
-                        }
-                        outN.close();
+                if (in.peek() == ifstream::traits_type::eof()) {
+                    outN << difficulty << endl;
                 }
 
-                else if (level == "2") {
+                q = 0;
 
-                        difficulty = "Medium";
-                        outN.open(Name + difficulty + ".txt", ios::app);
-                        in.open(Name + difficulty + ".txt", ios::app);
-                        if (in.peek() == ifstream::traits_type::eof()) {
-                                outN << difficulty << endl;
-                        }
+                while (true) {
 
+                    cout << "Enter question: ";
+                    getline(cin, Topics[q][0]);
 
-                         q = 0;
+                    cout << "Option A: ";
+                    getline(cin, Topics[q][1]);
 
-                        while (true) {
+                    cout << "Option B: ";
+                    getline(cin, Topics[q][2]);
 
-                                cout << "Enter question: ";
-                                getline(cin, Topics[q][0]);
+                    cout << "Option C: ";
+                    getline(cin, Topics[q][3]);
 
-                                cout << "Option A: ";
-                                getline(cin, Topics[q][1]);
+                    cout << "Option D: ";
+                    getline(cin, Topics[q][4]);
 
-                                cout << "Option B: ";
-                                getline(cin, Topics[q][2]);
+                    cout << "Correct option: ";
+                    getline(cin, Topics[q][5]);
 
-                                cout << "Option C: ";
-                                getline(cin, Topics[q][3]);
+                    // Write all to file
+                    outN << "Q: " << Topics[q][0] << endl;
+                    outN << "A) " << Topics[q][1] << endl;
+                    outN << "B) " << Topics[q][2] << endl;
+                    outN << "C) " << Topics[q][3] << endl;
+                    outN << "D) " << Topics[q][4] << endl;
+                    outN << "Correct: " << Topics[q][5] << endl;
+                    outN << "-----------------" << endl;
 
-                                cout << "Option D: ";
-                                getline(cin, Topics[q][4]);
+                    q++;
+                    do {
+                        cout << "\nEnter 1 or 2: \n1. continue entring mcqs\n2. Back\n";
+                        cin >> exit;
+                        if (exit == "2") break;
+                        if (exit != "1") cout << "Invalid Move!\n";
 
-                                cout << "Correct option: ";
-                                getline(cin, Topics[q][5]);
+                        cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+                    } while (exit != "1");
 
-                                // Write all to file
-                                outN << "Q: " << Topics[q][0] << endl;
-                                outN << "A) " << Topics[q][1] << endl;
-                                outN << "B) " << Topics[q][2] << endl;
-                                outN << "C) " << Topics[q][3] << endl;
-                                outN << "D) " << Topics[q][4] << endl;
-                                outN << "Correct: " << Topics[q][5] << endl;
-                                outN << "-----------------" << endl;
-                                q++;
-
-                                do {
-                                        cout << "\nEnter 1 or 2: \n1. continue entring mcqs\n2. Back\n";
-                                        cin >> exit;
-                                        if (exit == "2") break;
-                                        if (exit != "1") cout << "Invalid Move!\n";
-
-                                        cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
-                                } while (exit != "1");
-
-                                if (exit == "2") break;
+                    if (exit == "2") break;
 
 
+                }
+                outN.close();
+            }
 
-                        }
-                        outN.close();
+            else if (level == "2") {
+
+                difficulty = "Medium";
+                outN.open(Name + difficulty + ".txt", ios::app);
+                in.open(Name + difficulty + ".txt", ios::app);
+                if (in.peek() == ifstream::traits_type::eof()) {
+                    outN << difficulty << endl;
                 }
 
-                else if (level == "3") {
 
-                        difficulty = "Hard";
-                        outN.open(Name + difficulty + ".txt", ios::app);
-                        in.open(Name + difficulty + ".txt", ios::app);
+                q = 0;
 
-                        if (in.peek() == ifstream::traits_type::eof()) {
-                                outN << difficulty << endl;
-                        }
+                while (true) {
 
+                    cout << "Enter question: ";
+                    getline(cin, Topics[q][0]);
 
+                    cout << "Option A: ";
+                    getline(cin, Topics[q][1]);
 
-                         q = 0;
+                    cout << "Option B: ";
+                    getline(cin, Topics[q][2]);
 
-                        while (true) {
+                    cout << "Option C: ";
+                    getline(cin, Topics[q][3]);
 
-                                cout << "Enter question: ";
-                                getline(cin, Topics[q][0]);
+                    cout << "Option D: ";
+                    getline(cin, Topics[q][4]);
 
-                                cout << "Option A: ";
-                                getline(cin, Topics[q][1]);
+                    cout << "Correct option: ";
+                    getline(cin, Topics[q][5]);
 
-                                cout << "Option B: ";
-                                getline(cin, Topics[q][2]);
+                    // Write all to file
+                    outN << "Q: " << Topics[q][0] << endl;
+                    outN << "A) " << Topics[q][1] << endl;
+                    outN << "B) " << Topics[q][2] << endl;
+                    outN << "C) " << Topics[q][3] << endl;
+                    outN << "D) " << Topics[q][4] << endl;
+                    outN << "Correct: " << Topics[q][5] << endl;
+                    outN << "-----------------" << endl;
+                    q++;
 
-                                cout << "Option C: ";
-                                getline(cin, Topics[q][3]);
+                    do {
+                        cout << "\nEnter 1 or 2: \n1. continue entring mcqs\n2. Back\n";
+                        cin >> exit;
+                        if (exit == "2") break;
+                        if (exit != "1") cout << "Invalid Move!\n";
 
-                                cout << "Option D: ";
-                                getline(cin, Topics[q][4]);
+                        cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+                    } while (exit != "1");
 
-                                cout << "Correct option: ";
-                                getline(cin, Topics[q][5]);
-
-                                // Write all to file
-                                outN << "Q: " << Topics[q][0] << endl;
-                                outN << "A) " << Topics[q][1] << endl;
-                                outN << "B) " << Topics[q][2] << endl;
-                                outN << "C) " << Topics[q][3] << endl;
-                                outN << "D) " << Topics[q][4] << endl;
-                                outN << "Correct: " << Topics[q][5] << endl;
-                                outN << "-----------------" << endl;
-
-                                q++;
-                                do {
-                                        cout << "\nEnter 1 or 2: \n1. continue entring mcqs\n2. Back\n";
-                                        cin >> exit;
-                                        if (exit == "2") break;
-                                        if (exit != "1") cout << "Invalid Move!\n";
+                    if (exit == "2") break;
 
 
-                                        cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
-                                } while (exit != "1");
 
-                                if (exit == "2") break;
+                }
+                outN.close();
+            }
 
+            else if (level == "3") {
 
-                        }
+                difficulty = "Hard";
+                outN.open(Name + difficulty + ".txt", ios::app);
+                in.open(Name + difficulty + ".txt", ios::app);
 
-                        outN.close();
+                if (in.peek() == ifstream::traits_type::eof()) {
+                    outN << difficulty << endl;
                 }
 
-                else {
-                        cout << "Invalid command!\n";
 
-                        continue;
+
+                q = 0;
+
+                while (true) {
+
+                    cout << "Enter question: ";
+                    getline(cin, Topics[q][0]);
+
+                    cout << "Option A: ";
+                    getline(cin, Topics[q][1]);
+
+                    cout << "Option B: ";
+                    getline(cin, Topics[q][2]);
+
+                    cout << "Option C: ";
+                    getline(cin, Topics[q][3]);
+
+                    cout << "Option D: ";
+                    getline(cin, Topics[q][4]);
+
+                    cout << "Correct option: ";
+                    getline(cin, Topics[q][5]);
+
+                    // Write all to file
+                    outN << "Q: " << Topics[q][0] << endl;
+                    outN << "A) " << Topics[q][1] << endl;
+                    outN << "B) " << Topics[q][2] << endl;
+                    outN << "C) " << Topics[q][3] << endl;
+                    outN << "D) " << Topics[q][4] << endl;
+                    outN << "Correct: " << Topics[q][5] << endl;
+                    outN << "-----------------" << endl;
+
+                    q++;
+                    do {
+                        cout << "\nEnter 1 or 2: \n1. continue entring mcqs\n2. Back\n";
+                        cin >> exit;
+                        if (exit == "2") break;
+                        if (exit != "1") cout << "Invalid Move!\n";
+
+
+                        cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+                    } while (exit != "1");
+
+                    if (exit == "2") break;
+
+
                 }
+
+                outN.close();
+            }
+
+            else {
+                cout << "Invalid command!\n";
+
+                continue;
+            }
         }
-  }while (Invalid);
+    } while (Invalid);
 }
 
 
 void ViewTopicMcqs(string topicName[], string& difficulty, string Topics[100][6]) {
-        string confirm;
-        string level;
-        bool found = false;
-        string Name;
-        bool Invalid = true;
+    string confirm;
+    string level;
+    bool found = false;
+    string Name;
+    bool Invalid = true;
 
-        do {
+    do {
 
-                found = false;
-                Invalid = true;
+        found = false;
+        Invalid = true;
 
-                cout << "Enter 1 or 2:\n1. continue View topic mcqs\n2. Back to Admin mode\n";
-                cin >> confirm;
-                cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+        cout << "Enter 1 or 2:\n1. continue View topic mcqs\n2. Back to Admin mode\n";
+        cin >> confirm;
+        cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
 
-                if (confirm == "2") return;
-                else if (confirm != "1") {
-                        cout << "Invalid Command!\n";
-                        continue;
-                }
-                ifstream out("topicNames.txt");
-                string line;
-                
-                while (getline(out, line)) {
-                        cout <<"=> " << line << endl;
-                }
+        if (confirm == "2") return;
+        else if (confirm != "1") {
+            cout << "Invalid Command!\n";
+            continue;
+        }
+        ifstream out("topicNames.txt");
+        string line;
 
-                cout << "Enter topic to view MCQS : ";
-                getline(cin, Name);
+        while (getline(out, line)) {
+            cout << "=> " << line << endl;
+        }
 
-                out.close();
-                out.open("topicNames.txt");
+        cout << "Enter topic to view MCQS : ";
+        getline(cin, Name);
 
-                out.clear();
-                out.seekg(0);
+        out.close();
+        out.open("topicNames.txt");
+
+        out.clear();
+        out.seekg(0);
 
 
-                while (getline(out, line)) {
-                        if (line == Name) found = true;
-                }
-                out.close();
-                if (!found) {
-                        cout << "Either topic is not included or Spelling is not Correct!\n";
-                        continue;
+        while (getline(out, line)) {
+            if (line == Name) found = true;
+        }
+        out.close();
+        if (!found) {
+            cout << "Either topic is not included or Spelling is not Correct!\n";
+            continue;
+        }
+        else {
+
+
+            ifstream outN;
+
+            cout << "Enter the Difficulty level of topic: \n1. Easy\n2. Medium\n3. Hard \n";
+            cin >> level;
+            cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+
+
+            string line;
+
+
+            if (level == "1") {
+                difficulty = "Easy";
+                outN.open(Name + "Easy.txt");
+                if (!outN.is_open()) {
+                    cout << Name << " " << difficulty << " is NOT included!\n";
+                    continue;
                 }
                 else {
 
 
-                        ifstream outN;
+                    while (getline(outN, line)) {
+                        cout << line << endl;
+                    }
+                    outN.close();
+                    outN.clear();
+                    outN.seekg(0);
+                    continue;
 
-                        cout << "Enter the Difficulty level of topic: \n1. Easy\n2. Medium\n3. Hard \n";
-                        cin >> level;
-                        cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
-
-                        
-                        string line;
-
-
-                        if (level == "1") {
-                                difficulty = "Easy";
-                                outN.open(Name + "Easy.txt");
-                                if (!outN.is_open()) {
-                                        cout << Name << " " << difficulty << " is NOT included!\n";
-                                        continue;
-                                }
-                                else {
-
-
-                                        while (getline(outN, line)) {
-                                                cout << line << endl;
-                                        }
-                                        outN.close();
-                                        outN.clear();
-                                        outN.seekg(0);
-                                        continue;
-
-                                }
-                        }
-                        if (level == "2") {
-                                difficulty = "Medium";
-                                outN.open(Name + "Medium.txt");
-
-                                if (!outN.is_open()) {
-                                        cout << Name << " " << difficulty << " is NOT included!\n";
-                                        continue;
-                                }
-                                else {
-
-                                        while (getline(outN, line)) {
-                                                cout << line << endl;
-                                        }
-                                        outN.close();
-                                        outN.clear();
-                                        outN.seekg(0);
-                                        continue;
-
-                                }
-                        }
-                        if (level == "3") {
-                                difficulty = "Hard";
-                                outN.open(Name + "Hard.txt");
-
-                                if (!outN.is_open()) {
-                                        cout << Name << " " << difficulty << " is NOT included!\n";
-                                        continue;
-                                }
-                                else {
-                                        while (getline(outN, line)) {
-                                                cout << line << endl;
-                                        }
-                                        outN.close();
-                                        outN.clear();
-                                        outN.seekg(0);
-                                        continue;
-
-                                }
-                        }
-                        else {
-                                cout << "Invalid Command!\n";
-                                continue;
-                        }
                 }
-        } while (Invalid);
+            }
+            if (level == "2") {
+                difficulty = "Medium";
+                outN.open(Name + "Medium.txt");
+
+                if (!outN.is_open()) {
+                    cout << Name << " " << difficulty << " is NOT included!\n";
+                    continue;
+                }
+                else {
+
+                    while (getline(outN, line)) {
+                        cout << line << endl;
+                    }
+                    outN.close();
+                    outN.clear();
+                    outN.seekg(0);
+                    continue;
+
+                }
+            }
+            if (level == "3") {
+                difficulty = "Hard";
+                outN.open(Name + "Hard.txt");
+
+                if (!outN.is_open()) {
+                    cout << Name << " " << difficulty << " is NOT included!\n";
+                    continue;
+                }
+                else {
+                    while (getline(outN, line)) {
+                        cout << line << endl;
+                    }
+                    outN.close();
+                    outN.clear();
+                    outN.seekg(0);
+                    continue;
+
+                }
+            }
+            else {
+                cout << "Invalid Command!\n";
+                continue;
+            }
+        }
+    } while (Invalid);
 }
