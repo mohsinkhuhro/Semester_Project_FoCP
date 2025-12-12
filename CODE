@@ -7,6 +7,15 @@
 #include <iomanip> // for digits after point
 #include <cstdlib>
 #include <ctime>
+#include <conio.h>
+#include <sstream>
+#include <cstring>
+using namespace std;
+
+typedef unsigned int uint32;
+typedef unsigned long long uint64;
+
+
 //COLOURS
 #define RESET   "\033[0m"
 #define RED     "\033[31m"
@@ -30,34 +39,181 @@ void MakeQuiz(string& TopicName,string userName, string& difficulty, string Topi
 void ViewRecords(string userName);
 void AddStudents();
 void ViewStudentsRecord();
+string getHiddenInput();
+
+
+typedef unsigned int uint32;
+typedef unsigned long long uint64;
+
+class SHA256 {
+public:
+    SHA256() { reset(); }
+
+    void update(const uint8_t* data, size_t len) {
+        for (size_t i = 0; i < len; ++i) {
+            m_data[m_blocklen++] = data[i];
+            if (m_blocklen == 64) {
+                transform();
+                m_bitlen += 512;
+                m_blocklen = 0;
+            }
+        }
+    }
+
+    void update(const string& data) {
+        update(reinterpret_cast<const uint8_t*>(data.c_str()), data.size());
+    }
+
+    string hash() {
+        uint8_t hash[32];
+        pad();
+        revert(hash);
+
+        stringstream ss;
+        for (int i = 0; i < 32; i++)
+            ss << hex << setw(2) << setfill('0') << (int)hash[i];
+        return ss.str();
+    }
+
+private:
+    uint8_t m_data[64];
+    uint32 m_blocklen;
+    uint64 m_bitlen;
+    uint32 m_state[8];
+
+    static constexpr uint32 K[64] = {
+        0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,
+        0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,
+        0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,
+        0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,
+        0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,
+        0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,
+        0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,
+        0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2
+    };
+
+    static uint32 rotr(uint32 x, uint32 n) { return (x >> n) | (x << (32 - n)); }
+
+    static uint32 choose(uint32 e, uint32 f, uint32 g) {
+        return (e & f) ^ (~e & g);
+    }
+
+    static uint32 majority(uint32 a, uint32 b, uint32 c) {
+        return (a & b) ^ (a & c) ^ (b & c);
+    }
+
+    void transform() {
+        uint32 m[64], a, b, c, d, e, f, g, h;
+        for (uint32 i = 0, j = 0; i < 16; i++, j += 4)
+            m[i] = (m_data[j] << 24) | (m_data[j + 1] << 16) | (m_data[j + 2] << 8) | (m_data[j + 3]);
+        for (uint32 i = 16; i < 64; i++)
+            m[i] = m[i - 16] + (rotr(m[i - 15], 7) ^ rotr(m[i - 15], 18) ^ (m[i - 15] >> 3)) +
+            m[i - 7] + (rotr(m[i - 2], 17) ^ rotr(m[i - 2], 19) ^ (m[i - 2] >> 10));
+
+        a = m_state[0];
+        b = m_state[1];
+        c = m_state[2];
+        d = m_state[3];
+        e = m_state[4];
+        f = m_state[5];
+        g = m_state[6];
+        h = m_state[7];
+
+        for (uint32 i = 0; i < 64; i++) {
+            uint32 t1 = h + (rotr(e, 6) ^ rotr(e, 11) ^ rotr(e, 25)) + choose(e, f, g) + K[i] + m[i];
+            uint32 t2 = (rotr(a, 2) ^ rotr(a, 13) ^ rotr(a, 22)) + majority(a, b, c);
+            h = g;
+            g = f;
+            f = e;
+            e = d + t1;
+            d = c;
+            c = b;
+            b = a;
+            a = t1 + t2;
+        }
+
+        m_state[0] += a;
+        m_state[1] += b;
+        m_state[2] += c;
+        m_state[3] += d;
+        m_state[4] += e;
+        m_state[5] += f;
+        m_state[6] += g;
+        m_state[7] += h;
+    }
+
+    void pad() {
+        uint64 i = m_blocklen;
+        uint64 bitlen = m_bitlen + m_blocklen * 8;
+
+        m_data[i++] = 0x80;
+        if (m_blocklen < 56) {
+            while (i < 56)
+                m_data[i++] = 0x00;
+        }
+        else {
+            while (i < 64)
+                m_data[i++] = 0x00;
+            transform();
+            memset(m_data, 0, 56);
+        }
+
+        for (int j = 7; j >= 0; j--)
+            m_data[56 + (7 - j)] = (bitlen >> (j * 8)) & 0xff;
+
+        transform();
+    }
+
+    void revert(uint8_t* hash) {
+        for (int i = 0; i < 8; i++) {
+            hash[i * 4] = (m_state[i] >> 24) & 0xff;
+            hash[i * 4 + 1] = (m_state[i] >> 16) & 0xff;
+            hash[i * 4 + 2] = (m_state[i] >> 8) & 0xff;
+            hash[i * 4 + 3] = m_state[i] & 0xff;
+        }
+    }
+
+    void reset() {
+        m_blocklen = 0;
+        m_bitlen = 0;
+        m_state[0] = 0x6a09e667;
+        m_state[1] = 0xbb67ae85;
+        m_state[2] = 0x3c6ef372;
+        m_state[3] = 0xa54ff53a;
+        m_state[4] = 0x510e527f;
+        m_state[5] = 0x9b05688c;
+        m_state[6] = 0x1f83d9ab;
+        m_state[7] = 0x5be0cd19;
+    }
+};
+
+string sha256(const string& input) {
+    SHA256 sha;
+    sha.update(input);
+    return sha.hash();
+}
+
+
+//MAIN FUNCTION
 int main() {
     string topicName[100];
     string Topics[1000][6];
     string difficulty;
-    string a = "";
-
     string password = "vishal";
-    string Username = " ";
-    int mode;
     cout << CYAN << "====================================\n";
     cout << BOLD << "       WELCOME TO MCQS QUIZ APP\n" << RESET;
     cout << CYAN << "====================================\n\n";
     ChooseMode(topicName, difficulty, Topics);
 
   
-    /*ofstream out("Usernames.txt");
-    string line="";
-    out << line << endl;*/
-    
-          
-    
-
-
+  
     return 0;
 }
+// FOR SELCETIN MODES(ADMIN/USER)
 void ChooseMode(string topicName[], string& difficulty, string Topics[100][6]) {
+    string storedHash = "bc7df16747d8a79bbe0da2757a4ad66dfafb888a4cd825c3963589cac405c8e0";
     string x;
-    string password = "vishal", Enterpassword;
+    string password = "vishal", pass;
 
     while (true) {
         cout << YELLOW << "Select Mode:\n" << RESET;
@@ -69,8 +225,8 @@ void ChooseMode(string topicName[], string& difficulty, string Topics[100][6]) {
         cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
         if (x == "1") {
             cout << "Enter password: ";
-            getline(cin, Enterpassword);
-            if (Enterpassword == password) {
+            string pass = getHiddenInput();
+            if (sha256(pass) == storedHash) {
                 AdminMode(topicName, difficulty, Topics);
 
             }
@@ -94,7 +250,7 @@ void ChooseMode(string topicName[], string& difficulty, string Topics[100][6]) {
     }
 }
 
-
+// ADMIN MODE
 void AdminMode(string topicName[], string& difficulty, string Topics[100][6]) {
     string choose;
     string exit;
@@ -144,6 +300,7 @@ void AdminMode(string topicName[], string& difficulty, string Topics[100][6]) {
         }
     }
 }
+//IT WILL ADD NEW TOPICS AND QUESTIONS
 void AddNewTopic(string topicName[], string& difficulty, string Topics[100][6]) {
     
     string out = "1", level;
@@ -283,7 +440,7 @@ void AddNewTopic(string topicName[], string& difficulty, string Topics[100][6]) 
                 cout << "Correct option: ";
                 getline(cin, Topics[q][5]);
 
-                // Write all to file
+                //Write all to file
                 outN << "Q: " << Topics[q][0] << endl;
                 outN << "A) " << Topics[q][1] << endl;
                 outN << "B) " << Topics[q][2] << endl;
@@ -346,7 +503,7 @@ void AddNewTopic(string topicName[], string& difficulty, string Topics[100][6]) 
                 cout << "Correct option: ";
                 getline(cin, Topics[q][5]);
 
-                // Write all to file
+                //Write all to file
                 outN << "Q: " << Topics[q][0] << endl;
                 outN << "A) " << Topics[q][1] << endl;
                 outN << "B) " << Topics[q][2] << endl;
@@ -380,7 +537,7 @@ void AddNewTopic(string topicName[], string& difficulty, string Topics[100][6]) 
     }
 }
 
-
+//THIS FUCNTION WILL REMOVE A SPACIFIC TOPIC OR ITS LEVEL FROM PROGRAM, NOTE=> IT WILL NOT COMPLETELT DELETED FROM RAM
 void RemoveTopic() {
     string Name;
     string confirm;
@@ -551,6 +708,7 @@ void RemoveTopic() {
 
 }
 
+// THIS FUNCTION IS FOR ADDING QUESTION TO AVAILIBILE TOPICS
 void AddMcqsToTopic(string topicName[], string& difficulty, string Topics[100][6]) {
     string confirm;
     string level;
@@ -795,7 +953,7 @@ void AddMcqsToTopic(string topicName[], string& difficulty, string Topics[100][6
     } while (Invalid);
 }
 
-
+//IT WILL SHOW ALL TOPIC- WISE MCQS
 void ViewTopicMcqs(string topicName[], string& difficulty, string Topics[100][6]) {
     string confirm;
     string level;
@@ -927,7 +1085,7 @@ void ViewTopicMcqs(string topicName[], string& difficulty, string Topics[100][6]
         }
     } while (Invalid);
 }
-
+//FOR ADDING STUDENTS
 void AddStudents() {
     string confirm;
     string username;
@@ -951,6 +1109,7 @@ void AddStudents() {
     }
 }
 
+//SHOW ALL STUDENTS RECORDS
 void ViewStudentsRecord() {
     string confirm;
     string level;
@@ -1003,6 +1162,8 @@ void ViewStudentsRecord() {
     }
 }
 
+
+//USER MODE , IT REQUIRED USERNAME WHICH WILL ADD BY ADMIN/TEACHER
 void UserMode(string topicName[], string& difficulty, string Topics[][6]) {
     string username;
     string confirm;
@@ -1160,7 +1321,9 @@ void UserMode(string topicName[], string& difficulty, string Topics[][6]) {
     }
 }
 
-void MakeQuiz(string& TopicName,string userName, string& difficulty, string Topics[][6]) {
+// THIS WILL MAKE COMPLETE QUIZ AND ITS COMPLETE SOLUTION
+void MakeQuiz(string& TopicName, string userName, string& difficulty, string Topics[][6]) {
+
     int Noofmcqs;
     string line;
     int AvaQues = -1;
@@ -1168,82 +1331,107 @@ void MakeQuiz(string& TopicName,string userName, string& difficulty, string Topi
     string userAns;
     string correctAns;
     string useless;
+    string Wrong;
     bool timeup = false;
     int score = 0;
+
     ofstream results(userName + ".txt", ios::app);
     ifstream cheack(TopicName + ".txt");
-    while (getline(cheack, line)) {
+    fstream wrong("wrong.txt", ios::app);
+
+    while (getline(cheack, line))
         AvaQues++;
 
-    }
     cout << TopicName << endl;
-    results << TopicName<<endl;
+    results << TopicName << endl;
+
     AvaQues /= 7;
-    cheack.clear();   // clear EOF flag
-    cheack.seekg(0);  // move back to start of file
+
+    cheack.clear();
+    cheack.seekg(0);
 
     do {
         cout << "Enter the number of MCQS for QUIZ!\n";
-        cout <<GREEN<< "NOTE => you can enter the Maximum (" << AvaQues << ") number of MCQS!!\n"<<RESET;
+        cout << GREEN << "NOTE => you can enter the Maximum (" << AvaQues << ") MCQS!!\n" << RESET;
         cin >> Noofmcqs;
         cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
 
-        if (Noofmcqs > AvaQues) {
-            cout <<YELLOW<< "Sorry there are only " << AvaQues << " MCQS saved!\n"<<RESET;
+        if (Noofmcqs <= 0) {
+            cout << RED << "Invalid Number!\n" << RESET;
+            continue;
+        }
+        else if (Noofmcqs > AvaQues) {
+            cout << YELLOW << "Sorry there are only " << AvaQues << " MCQS saved!\n" << RESET;
             continue;
         }
         else {
-            cout << CYAN << "You have " <<YELLOW<< Noofmcqs<<CYAN << " minutes to attempt this quiz!\n" << RESET;
+            cout << CYAN << "You have " << YELLOW << Noofmcqs << CYAN << " minutes to attempt this quiz!\n" << RESET;
             cout << YELLOW << "NOTE: Quiz can't be paused or exited once started.\n" << RESET;
-
             cout << "Enter 1 or 2\n1. Start Quiz\n2. EXIT Quiz\n";
             cin >> confirm;
             cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+
             if (confirm == "2") {
-                cout << "You Exit Quiz\n";
+                cout << RED << "You Exit Quiz\n" << RESET;
                 return;
             }
             else if (confirm != "1") {
-                cout <<RED<< "Invalid command\nQUIZ EXITED\n"<<RESET;
+                cout << RED << "Invalid command\nQUIZ EXITED\n" << RESET;
                 return;
             }
 
+            cout << CYAN << "\nQUIZ STARTS\nBEST OF LUCK\n" << RESET;
+
             auto start = chrono::high_resolution_clock::now();
+
             for (int i = 1; i <= Noofmcqs; i++) {
+
                 cout << endl;
-                cout << "Question No. " << i << "\nChoose the Correct one\n";
+                cout << "Question No. " << i << "\n";
+
                 auto now = chrono::high_resolution_clock::now();
-
                 auto elapsed = chrono::duration_cast<chrono::seconds>(now - start);
-                if (elapsed.count() >= Noofmcqs*60) {
-                    cout <<BLUE<< "Time is over!\n"<<RESET;
+
+                if (elapsed.count() >= Noofmcqs * 60) {
+                    cout << BLUE << "Time is over!\n" << RESET;
                     timeup = true;
-                }
-                else {
-                    if (i == 1) getline(cheack, useless);
-                    for (int j = 1; j <= 5; j++) {
-                        getline(cheack, line);
-                        cout << line << endl;
-                        
-                    }
-                    getline(cheack, correctAns);
-                    cout << "Enter your Choice(A/B/C/D): ";
-                   
-                    cin >> userAns;
-                    if (elapsed.count() >= Noofmcqs * 60) {
-                        cout << BLUE << "Time is over!\n" << RESET;
-                        timeup = true;
-                        break;
-                    }
-                    if (userAns == correctAns) score++;
-                    getline(cheack, useless);
-                    
+                    break;
                 }
 
-            }  
+                if (i == 1) getline(cheack, useless);
+
+                for (int j = 1; j <= 5; j++) {
+                    getline(cheack, line);
+                    cout << line << endl;
+                }
+
+                getline(cheack, correctAns);
+
+                cout << "Enter your Choice(A/B/C/D): ";
+                cin >> userAns;
+
+                now = chrono::high_resolution_clock::now();
+                elapsed = chrono::duration_cast<chrono::seconds>(now - start);
+
+                if (elapsed.count() >= Noofmcqs * 60) {
+                    cout << BLUE << "Time is over!\n" << RESET;
+                    timeup = true;
+                    break;
+                }
+
+                if (userAns == correctAns)
+                    score++;
+                else {
+                    wrong << i << endl << userAns << endl;
+                }
+
+                getline(cheack, useless);
+            }
+
             auto end = chrono::high_resolution_clock::now();
             auto timetaken = chrono::duration_cast<chrono::seconds>(end - start);
-            cout <<RED<< "QUIZ ENDS!!\n"<<RESET;
+
+            cout << RED << "QUIZ ENDS!!\n" << RESET;
             cout << CYAN << "====================================\n";
             cout << BOLD << "            QUIZ RESULTS\n" << RESET;
             cout << CYAN << "====================================\n\n";
@@ -1253,35 +1441,94 @@ void MakeQuiz(string& TopicName,string userName, string& difficulty, string Topi
 
             results << "RESULT => You Got " << score << " marks out of " << Noofmcqs << " in " << TopicName << endl;
             results << "Completed the Quiz in " << fixed << setprecision(1) << timetaken.count() / 60.0 << " minutes!\n" << endl;
-            cout << "Want complete Solution?\nenter: 1 for complete solution\nenter: any number to EXIT!\n";
+
+            cout << "Want complete Solution and analysis?\nenter: 1 for complete solution\nenter: any number to EXIT!\n";
             cin >> confirm;
-            int x = 0;
-            cheack.clear();
-            cheack.seekg(0);
+
+            int wrongQ[500], wCount = 0;
+            string wrongAns[500];
+
+            wrong.close();
+            ifstream wrongR("wrong.txt");
+
+            while (getline(wrongR, Wrong)) {
+                wrongQ[wCount] = stoi(Wrong);
+                getline(wrongR, Wrong);
+                wrongAns[wCount] = Wrong;
+                wCount++;
+            }
+            wrongR.close();
+
             if (confirm == "1") {
-                cout <<GREEN<< "            SOLUTION\n"<<RESET;
-                cout<< WHITE << "====================================\n";
-                while (getline(cheack, line)) {
-                    x++;
+
+                cout << GREEN << "\n============ COMPLETE SOLUTION AND ANALYSIS ============\n\n" << RESET;
+
+                cheack.clear();
+                cheack.seekg(0);
+
+                
+              
+                getline(cheack, useless);
+               
+
+               
+                for (int q = 1; q <= Noofmcqs; q++) {
+                    string qline, optA, optB, optC, optD, corr, sep;
+
                     
-                    if (x % 7 == 0) cout << "Correct option Is = ";
-                    cout << line << endl;
-                    if (x > 1) {
-                        if (x == Noofmcqs * 7) {
+                    if (!getline(cheack, qline)) break;
+                    if (!getline(cheack, optA)) break;
+                    if (!getline(cheack, optB)) break;
+                    if (!getline(cheack, optC)) break;
+                    if (!getline(cheack, optD)) break;
+                    if (!getline(cheack, corr)) break;
+
+                   
+                    cout << BOLD << "Question NO. " << q << ": " << RESET <<endl<< qline << endl;
+                    cout << optA << endl;
+                    cout << optB << endl;
+                    cout << optC << endl;
+                    cout << optD << endl;
+
+                  
+                    bool isWrong = false;
+                    string wGiven;
+                    for (int i = 0; i < wCount; i++) {
+                        if (wrongQ[i] == q) {
+                            isWrong = true;
+                            wGiven = wrongAns[i];
                             break;
                         }
                     }
-                }
-                cout << WHITE << "====================================\n"<<RESET;
-                cheack.close();
-                cheack.clear();
-                cheack.seekg(0);
-            }
-            return;
 
+                    
+                    if (isWrong) {
+                        cout << RED << "Your Answer: " << wGiven << RESET << endl;
+                        cout << GREEN << "Correct Answer: " << corr << RESET << endl;
+                    }
+                    else {
+                        cout << GREEN << "Correct Answer: " << corr << RESET << endl;
+                    }
+
+                    
+                    getline(cheack, sep);
+                    cout << WHITE << "------------------------------------\n" << RESET;
+                }
+
+                cout << GREEN << "========================================\n" << RESET;
+            }
+
+
+
+            ofstream clearW("wrong.txt");
+            clearW << "";
+            clearW.close();
+
+            return;
         }
     } while (1);
 }
+
 
 void ViewRecords(string userName) {
     string line;
@@ -1299,4 +1546,32 @@ void ViewRecords(string userName) {
     }
     cout << WHITE << "====================================\n\n";
 }
-    
+string getHiddenInput() {
+    string pass = "";
+    char ch;
+
+    while (true) {
+        ch = _getch();
+
+        if (ch == 13) { // Enter key
+            cout << endl;
+            break;
+        }
+        else if (ch == 8) { // Backspace
+            if (!pass.empty()) {
+                cout << "\b \b";
+                pass.pop_back();
+            }
+        }
+        else {
+            pass.push_back(ch);
+            cout << '*';
+        }
+    }
+
+    return pass;
+}
+
+
+
+
