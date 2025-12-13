@@ -30,168 +30,19 @@ typedef unsigned long long uint64;
 using namespace std;
 void ChooseMode(string topicName[], string& difficulty, string Topics[][6]);
 void AdminMode(string topicName[], string& difficulty, string Topics[][6]);
-void UserMode(string topicName[], string& difficulty, string Topics[][6]);
+void UserMode(string topicName[], string& difficulty);
 void AddNewTopic(string topicName[], string& difficulty, string Topics[][6]);
 void RemoveTopic();
 void AddMcqsToTopic(string topicName[], string& difficulty, string Topics[][6]);
-void ViewTopicMcqs(string topicName[], string& difficulty, string Topics[][6]);
-void MakeQuiz(string& TopicName,string userName, string& difficulty, string Topics[][6]);
+void ViewTopicMcqs(string& difficulty);
+void MakeQuiz(string& TopicName,string userName, string& difficulty);
 void ViewRecords(string userName);
 void AddStudents();
 void ViewStudentsRecord();
 string getHiddenInput();
 
 
-typedef unsigned int uint32;
-typedef unsigned long long uint64;
 
-class SHA256 {
-public:
-    SHA256() { reset(); }
-
-    void update(const uint8_t* data, size_t len) {
-        for (size_t i = 0; i < len; ++i) {
-            m_data[m_blocklen++] = data[i];
-            if (m_blocklen == 64) {
-                transform();
-                m_bitlen += 512;
-                m_blocklen = 0;
-            }
-        }
-    }
-
-    void update(const string& data) {
-        update(reinterpret_cast<const uint8_t*>(data.c_str()), data.size());
-    }
-
-    string hash() {
-        uint8_t hash[32];
-        pad();
-        revert(hash);
-
-        stringstream ss;
-        for (int i = 0; i < 32; i++)
-            ss << hex << setw(2) << setfill('0') << (int)hash[i];
-        return ss.str();
-    }
-
-private:
-    uint8_t m_data[64];
-    uint32 m_blocklen;
-    uint64 m_bitlen;
-    uint32 m_state[8];
-
-    static constexpr uint32 K[64] = {
-        0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,
-        0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,
-        0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,
-        0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,
-        0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,
-        0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,
-        0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,
-        0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2
-    };
-
-    static uint32 rotr(uint32 x, uint32 n) { return (x >> n) | (x << (32 - n)); }
-
-    static uint32 choose(uint32 e, uint32 f, uint32 g) {
-        return (e & f) ^ (~e & g);
-    }
-
-    static uint32 majority(uint32 a, uint32 b, uint32 c) {
-        return (a & b) ^ (a & c) ^ (b & c);
-    }
-
-    void transform() {
-        uint32 m[64], a, b, c, d, e, f, g, h;
-        for (uint32 i = 0, j = 0; i < 16; i++, j += 4)
-            m[i] = (m_data[j] << 24) | (m_data[j + 1] << 16) | (m_data[j + 2] << 8) | (m_data[j + 3]);
-        for (uint32 i = 16; i < 64; i++)
-            m[i] = m[i - 16] + (rotr(m[i - 15], 7) ^ rotr(m[i - 15], 18) ^ (m[i - 15] >> 3)) +
-            m[i - 7] + (rotr(m[i - 2], 17) ^ rotr(m[i - 2], 19) ^ (m[i - 2] >> 10));
-
-        a = m_state[0];
-        b = m_state[1];
-        c = m_state[2];
-        d = m_state[3];
-        e = m_state[4];
-        f = m_state[5];
-        g = m_state[6];
-        h = m_state[7];
-
-        for (uint32 i = 0; i < 64; i++) {
-            uint32 t1 = h + (rotr(e, 6) ^ rotr(e, 11) ^ rotr(e, 25)) + choose(e, f, g) + K[i] + m[i];
-            uint32 t2 = (rotr(a, 2) ^ rotr(a, 13) ^ rotr(a, 22)) + majority(a, b, c);
-            h = g;
-            g = f;
-            f = e;
-            e = d + t1;
-            d = c;
-            c = b;
-            b = a;
-            a = t1 + t2;
-        }
-
-        m_state[0] += a;
-        m_state[1] += b;
-        m_state[2] += c;
-        m_state[3] += d;
-        m_state[4] += e;
-        m_state[5] += f;
-        m_state[6] += g;
-        m_state[7] += h;
-    }
-
-    void pad() {
-        uint64 i = m_blocklen;
-        uint64 bitlen = m_bitlen + m_blocklen * 8;
-
-        m_data[i++] = 0x80;
-        if (m_blocklen < 56) {
-            while (i < 56)
-                m_data[i++] = 0x00;
-        }
-        else {
-            while (i < 64)
-                m_data[i++] = 0x00;
-            transform();
-            memset(m_data, 0, 56);
-        }
-
-        for (int j = 7; j >= 0; j--)
-            m_data[56 + (7 - j)] = (bitlen >> (j * 8)) & 0xff;
-
-        transform();
-    }
-
-    void revert(uint8_t* hash) {
-        for (int i = 0; i < 8; i++) {
-            hash[i * 4] = (m_state[i] >> 24) & 0xff;
-            hash[i * 4 + 1] = (m_state[i] >> 16) & 0xff;
-            hash[i * 4 + 2] = (m_state[i] >> 8) & 0xff;
-            hash[i * 4 + 3] = m_state[i] & 0xff;
-        }
-    }
-
-    void reset() {
-        m_blocklen = 0;
-        m_bitlen = 0;
-        m_state[0] = 0x6a09e667;
-        m_state[1] = 0xbb67ae85;
-        m_state[2] = 0x3c6ef372;
-        m_state[3] = 0xa54ff53a;
-        m_state[4] = 0x510e527f;
-        m_state[5] = 0x9b05688c;
-        m_state[6] = 0x1f83d9ab;
-        m_state[7] = 0x5be0cd19;
-    }
-};
-
-string sha256(const string& input) {
-    SHA256 sha;
-    sha.update(input);
-    return sha.hash();
-}
 
 
 //MAIN FUNCTION
@@ -226,7 +77,7 @@ void ChooseMode(string topicName[], string& difficulty, string Topics[100][6]) {
         if (x == "1") {
             cout << "Enter password: ";
             string pass = getHiddenInput();
-            if (sha256(pass) == storedHash) {
+            if (pass == "vishal16") {
                 AdminMode(topicName, difficulty, Topics);
 
             }
@@ -237,7 +88,7 @@ void ChooseMode(string topicName[], string& difficulty, string Topics[100][6]) {
         }
         else if (x == "2") {
             
-           UserMode(topicName, difficulty, Topics);
+           UserMode(topicName, difficulty);
         }
         else if (x == "3") {
             cout << RED << "YOU EXIT THE APP\n" << RESET;
@@ -282,11 +133,11 @@ void AdminMode(string topicName[], string& difficulty, string Topics[100][6]) {
         else if (choose == "3") AddMcqsToTopic(topicName, difficulty, Topics);
 
         else if (choose == "4") {
-            ViewTopicMcqs(topicName, difficulty, Topics);
+            ViewTopicMcqs(difficulty);
         }
         else if (choose == "5") {
             AddStudents();
-            cout << "vishal\n";
+           
         }
         else if (choose == "6") {
             ViewStudentsRecord();
@@ -954,7 +805,7 @@ void AddMcqsToTopic(string topicName[], string& difficulty, string Topics[100][6
 }
 
 //IT WILL SHOW ALL TOPIC- WISE MCQS
-void ViewTopicMcqs(string topicName[], string& difficulty, string Topics[100][6]) {
+void ViewTopicMcqs(string& difficulty) {
     string confirm;
     string level;
     bool found = false;
@@ -1092,7 +943,11 @@ void AddStudents() {
     
     
     while(true) {
+        string name;
         ofstream outN;
+        int i = 0;
+        bool alr = false;
+        ifstream in("Usernames.txt");
         cout << "Enter 1 or 2:\n1. continue Add students (username)\n2. Back to Admin mode\n";
         cin >> confirm;
         if (confirm == "2") return;
@@ -1100,12 +955,27 @@ void AddStudents() {
             cout << RED << "Invalid Command!\n" << RESET;
             continue;
         }
+        cout << "\nLIST OF STUDENTS (Already added)\n";
+        while (getline(in, name)) {
+            cout << ++i << ". " << name << endl;
+        }
+        in.close();
+        in.open("Usernames.txt");
         cout << "Enter the username to Add: ";
         cin >> username;
-        outN.open("Usernames.txt", ios::app);
-        outN << username << endl;
-        outN.close();
-        cout << username << " is added!\n";
+        while (getline(in, name)) {
+            if (username == name) {
+                cout <<GREEN<<username <<YELLOW<< " is Already Added!\n"<<RESET;
+                alr = true;
+                break;
+           }
+        }
+        if (!alr) {
+            outN.open("Usernames.txt", ios::app);
+            outN << username << endl;
+            outN.close();
+            cout << GREEN << username << " is added!\n" << RESET;
+        }
     }
 }
 
@@ -1164,13 +1034,12 @@ void ViewStudentsRecord() {
 
 
 //USER MODE , IT REQUIRED USERNAME WHICH WILL ADD BY ADMIN/TEACHER
-void UserMode(string topicName[], string& difficulty, string Topics[][6]) {
+void UserMode(string topicName[], string& difficulty) {
     string username;
     string confirm;
     string level;
     bool found;
     string Name;
-    string Noofmcqs;
     string line;
     ifstream out;
     while (true) {
@@ -1262,7 +1131,7 @@ void UserMode(string topicName[], string& difficulty, string Topics[][6]) {
                 
                         ifstream outN;
                         ofstream cheack;
-                        cout << "Enter the Difficulty level of QUIZ:(enter 1,2,or 3)\n1. Easy\n2. Medium\n3. Hard \n";
+                        cout << "\nEnter the Difficulty level of QUIZ:(enter 1,2,or 3)\n1. Easy\n2. Medium\n3. Hard \n";
                         cin >> level;
                         cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
 
@@ -1279,7 +1148,7 @@ void UserMode(string topicName[], string& difficulty, string Topics[][6]) {
                             }
                             else {
 
-                                MakeQuiz(Name, username, difficulty, Topics);
+                                MakeQuiz(Name, username, difficulty);
                             }
                         }
                         else if (level == "2") {
@@ -1288,12 +1157,12 @@ void UserMode(string topicName[], string& difficulty, string Topics[][6]) {
                             outN.open(Name + ".txt");
 
                             if (!outN.is_open()) {
-                                cout << Name << " " << difficulty << " is NOT included!\n";
+                                cout <<YELLOW<< Name << " " << difficulty << " is NOT included!\n";
                                 continue;
                             }
                             else {
 
-                                MakeQuiz(Name, username, difficulty, Topics);
+                                MakeQuiz(Name, username, difficulty);
                             }
                         }
                         else if (level == "3") {
@@ -1302,11 +1171,11 @@ void UserMode(string topicName[], string& difficulty, string Topics[][6]) {
                             outN.open(Name + ".txt");
 
                             if (!outN.is_open()) {
-                                cout << Name << " " << difficulty << " is NOT included!\n";
+                                cout <<YELLOW<< Name << " " << difficulty << " is NOT included!\n";
                                 continue;
                             }
                             else {
-                                MakeQuiz(Name, username, difficulty, Topics);
+                                MakeQuiz(Name, username, difficulty);
                             }
                         }
                         else {
@@ -1322,9 +1191,9 @@ void UserMode(string topicName[], string& difficulty, string Topics[][6]) {
 }
 
 // THIS WILL MAKE COMPLETE QUIZ AND ITS COMPLETE SOLUTION
-void MakeQuiz(string& TopicName, string userName, string& difficulty, string Topics[][6]) {
+void MakeQuiz(string& TopicName, string userName, string& difficulty) {
 
-    int Noofmcqs;
+    float Noofmcqs;
     string line;
     int AvaQues = -1;
     string confirm;
@@ -1332,8 +1201,9 @@ void MakeQuiz(string& TopicName, string userName, string& difficulty, string Top
     string correctAns;
     string useless;
     string Wrong;
+    float average;
     bool timeup = false;
-    int score = 0;
+    float score = 0;
 
     ofstream results(userName + ".txt", ios::app);
     ifstream cheack(TopicName + ".txt");
@@ -1430,12 +1300,18 @@ void MakeQuiz(string& TopicName, string userName, string& difficulty, string Top
 
             auto end = chrono::high_resolution_clock::now();
             auto timetaken = chrono::duration_cast<chrono::seconds>(end - start);
-
+            average = (score / Noofmcqs)*(100.0);
             cout << RED << "QUIZ ENDS!!\n" << RESET;
             cout << CYAN << "====================================\n";
             cout << BOLD << "            QUIZ RESULTS\n" << RESET;
             cout << CYAN << "====================================\n\n";
             cout << GREEN << "Score: " << score << " out of " << Noofmcqs << RESET << "\n";
+            if (average <= 50) {
+                cout << RED << "PRECENTAGE: " << average << "%" << RESET<<endl;
+            }
+            else {
+                cout << GREEN << "PRECENTAGE: " << average << "%" << RESET<<endl;
+            }
             cout << YELLOW << "Time Taken: " << fixed << setprecision(1) << timetaken.count() / 60.0 << " minutes\n" << RESET;
             cout << CYAN << "====================================\n" << RESET;
 
@@ -1534,7 +1410,7 @@ void ViewRecords(string userName) {
     string line;
     ifstream records(userName + ".txt");
     cout << WHITE << "====================================\n";
-    cout << MAGENTA << userName<< " Records\n"<<RESET;
+    cout << MAGENTA << userName<< " Records\n\n"<<RESET;
     
     if (records.peek() == ifstream::traits_type::eof()) {
         cout <<RED<< "NO Records Found!\n"<<RESET;
