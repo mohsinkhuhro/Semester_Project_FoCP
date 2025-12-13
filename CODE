@@ -8,12 +8,8 @@
 #include <cstdlib>
 #include <ctime>
 #include <conio.h>
-#include <sstream>
-#include <cstring>
-using namespace std;
 
-typedef unsigned int uint32;
-typedef unsigned long long uint64;
+using namespace std;
 
 
 //COLOURS
@@ -955,13 +951,13 @@ void AddStudents() {
             cout << RED << "Invalid Command!\n" << RESET;
             continue;
         }
-        cout << "\nLIST OF STUDENTS (Already added)\n";
+        cout <<YELLOW<< "\nLIST OF STUDENTS (Already added)\n";
         while (getline(in, name)) {
-            cout << ++i << ". " << name << endl;
+            cout <<BOLD<< ++i << ". " << name << endl;
         }
         in.close();
         in.open("Usernames.txt");
-        cout << "Enter the username to Add: ";
+        cout <<RESET<< "Enter the username to Add: ";
         cin >> username;
         while (getline(in, name)) {
             if (username == name) {
@@ -1410,15 +1406,22 @@ void ViewRecords(string userName) {
     string line;
     ifstream records(userName + ".txt");
     cout << WHITE << "====================================\n";
-    cout << MAGENTA << userName<< " Records\n\n"<<RESET;
+    cout <<CYAN<<"<=== "<<BOLD<< userName << " Records"<<RESET<<CYAN<<" ===>\n\n" << RESET;
     
     if (records.peek() == ifstream::traits_type::eof()) {
         cout <<RED<< "NO Records Found!\n"<<RESET;
         cout << WHITE << "====================================\n\n";
         return;
     }
+    int i = 0;
     while (getline(records, line)) {
-        cout << line<<endl;
+        i++;
+        if (i % 4 == 1) {
+            cout << CYAN << i << ". In Topic " << line << RESET << endl;
+        }
+        else {
+            cout << line << endl;
+        }
     }
     cout << WHITE << "====================================\n\n";
 }
