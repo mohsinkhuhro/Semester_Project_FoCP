@@ -1,0 +1,211 @@
+Medium
+Q: The atomic number of Carbon is?
+A) 6
+B) 12
+C) 14
+D) 8
+A
+-----------------
+Q: The molecular formula of glucose is?
+A) C6H12O6
+B) C12H22O11
+C) C2H6O
+D) CH4
+A
+-----------------
+Q: H2SO4 is classified as?
+A) Strong acid
+B) Weak acid
+C) Strong base
+D) Weak base
+A
+-----------------
+Q: NH3 is a?
+A) Acid
+B) Base
+C) Salt
+D) Neutral
+B
+-----------------
+Q: CO2 + H2O → H2CO3 is an example of?
+A) Neutralization
+B) Oxidation
+C) Acid formation
+D) Decomposition
+C
+-----------------
+Q: The valency of Oxygen is?
+A) 1
+B) 2
+C) 3
+D) 4
+B
+-----------------
+Q: Which of these is an Alkali metal?
+A) Na
+B) Ca
+C) Al
+D) Fe
+A
+-----------------
+Q: The pH of lemon juice is approximately?
+A) 2
+B) 5
+C) 7
+D) 9
+A
+-----------------
+Q: The chemical formula of baking soda is?
+A) NaCl
+B) NaHCO3
+C) KCl
+D) CaCO3
+B
+-----------------
+Q: HCl + NaOH → ?
+A) NaCl + H2O
+B) NaOH + H2
+C) NaCl + H2
+D) Na2O + H2O
+A
+-----------------
+Q: Na2CO3 is called?
+A) Baking soda
+B) Washing soda
+C) Lime
+D) Salt
+B
+-----------------
+Q: CH4 is known as?
+A) Methane
+B) Ethane
+C) Propane
+D) Butane
+A
+-----------------
+Q: The gas released when metal reacts with acid is?
+A) O2
+B) H2
+C) CO2
+D) N2
+B
+-----------------
+Q: Ca(OH)2 is called?
+A) Lime
+B) Slaked lime
+C) Quick lime
+D) Baking soda
+B
+-----------------
+Q: NaCl + AgNO3 → ?
+A) AgCl + NaNO3
+B) NaNO3 + Ag
+C) NaCl + Ag
+D) NaCl + NO3
+A
+-----------------
+Q: The gas produced in fermentation is?
+A) Oxygen
+B) Carbon dioxide
+C) Hydrogen
+D) Nitrogen
+B
+-----------------
+Q: The chemical formula of common salt is?
+A) NaCl
+B) KCl
+C) Na2SO4
+D) CaCO3
+A
+-----------------
+Q: H2 + O2 → H2O is an example of?
+A) Synthesis
+B) Decomposition
+C) Displacement
+D) Double displacement
+A
+-----------------
+Q: CH4 + 2O2 → CO2 + 2H2O is?
+A) Combustion
+B) Neutralization
+C) Oxidation
+D) Reduction
+A
+-----------------
+Q: The acid present in vinegar is?
+A) Acetic acid
+B) Hydrochloric acid
+C) Sulfuric acid
+D) Nitric acid
+A
+-----------------
+Q: NaOH reacts with H2SO4 to give?
+A) Na2SO4 + H2O
+B) NaSO4 + H2
+C) NaOH + H2
+D) Na2O + H2O
+A
+-----------------
+Q: Which element is a halogen?
+A) Cl
+B) Na
+C) K
+D) Ca
+A
+-----------------
+Q: The molecular mass of H2O is?
+A) 16
+B) 18
+C) 20
+D) 22
+B
+-----------------
+Q: The main constituent of lime stone is?
+A) CaCO3
+B) NaCl
+C) KCl
+D) MgSO4
+A
+-----------------
+Q: KNO3 is commonly known as?
+A) Potash
+B) Saltpeter
+C) Baking soda
+D) Lime
+B
+-----------------
+Q: CH3COOH is classified as?
+A) Acid
+B) Base
+C) Salt
+D) Neutral
+A
+-----------------
+Q: The oxidation number of Oxygen in H2O2 is?
+A) -1
+B) -2
+C) 0
+D) +1
+A
+-----------------
+Q: The gas liberated in photosynthesis is?
+A) CO2
+B) O2
+C) H2
+D) N2
+B
+-----------------
+Q: Which of these is a noble gas?
+A) He
+B) O2
+C) N2
+D) H2
+A
+-----------------
+Q: The reaction Na + Cl2 → NaCl is?
+A) Combination
+B) Decomposition
+C) Displacement
+D) Redox
+A
+-----------------

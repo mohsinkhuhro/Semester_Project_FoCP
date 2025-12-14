@@ -1,0 +1,96 @@
+PhysicsMedium
+RESULT => You Got 5 marks out of 5 in PhysicsMedium
+Completed the Quiz in 1.6 minutes!
+
+MathEasy
+RESULT => You Got 2 marks out of 2 in MathEasy
+Completed the Quiz in 0.3 minutes!
+
+MathEasy
+RESULT => You Got 0 marks out of 0 in MathEasy
+Completed the Quiz in 0.0 minutes!
+
+MathEasy
+RESULT => You Got 26 marks out of 28 in MathEasy
+Completed the Quiz in 1.4 minutes!
+
+PhysicsHard
+RESULT => You Got 21 marks out of 31 in PhysicsHard
+Completed the Quiz in 4.2 minutes!
+
+ChemHard
+RESULT => You Got 3 marks out of 33 in ChemHard
+Completed the Quiz in 0.5 minutes!
+
+MathEasy
+RESULT => You Got 2 marks out of 5 in MathEasy
+Completed the Quiz in 0.5 minutes!
+
+MathEasy
+RESULT => You Got 2 marks out of 5 in MathEasy
+Completed the Quiz in 0.3 minutes!
+
+MathEasy
+RESULT => You Got 1 marks out of 3 in MathEasy
+Completed the Quiz in 0.1 minutes!
+
+MathEasy
+RESULT => You Got 1 marks out of 3 in MathEasy
+Completed the Quiz in 0.1 minutes!
+
+MathEasy
+RESULT => You Got 1 marks out of 3 in MathEasy
+Completed the Quiz in 0.1 minutes!
+
+MathEasy
+RESULT => You Got 1 marks out of 3 in MathEasy
+Completed the Quiz in 0.2 minutes!
+
+ChemEasy
+RESULT => You Got 2 marks out of 4 in ChemEasy
+Completed the Quiz in 0.2 minutes!
+
+MathEasy
+RESULT => You Got 1 marks out of 3 in MathEasy
+Completed the Quiz in 0.1 minutes!
+
+MathEasy
+RESULT => You Got 2 marks out of 3 in MathEasy
+Completed the Quiz in 0.2 minutes!
+
+MathEasy
+RESULT => You Got 2 marks out of 5 in MathEasy
+Completed the Quiz in 0.3 minutes!
+
+MathEasy
+RESULT => You Got 2 marks out of 3 in MathEasy
+Completed the Quiz in 0.2 minutes!
+
+EbgEasy
+RESULT => You Got 0 marks out of 4 in EbgEasy
+Completed the Quiz in 0.2 minutes!
+
+MathEasy
+RESULT => You Got 1 marks out of 10 in MathEasy
+Completed the Quiz in 0.1 minutes!
+
+MathMedium
+RESULT => You Got 0 marks out of 2 in MathEasy
+Completed the Quiz in 0.1 minutes!
+
+MathEasy
+RESULT => You Got 5 marks out of 10 in MathEasy
+Completed the Quiz in 0.8 minutes!
+
+MathEasy
+RESULT => You Got 7 marks out of 10 in MathEasy
+Completed the Quiz in 0.4 minutes!
+
+MathEasy
+RESULT => You Got 7 marks out of 10 in MathEasy
+Completed the Quiz in 0.3 minutes!
+
+MathEasy
+RESULT => You Got 5 marks out of 11 in MathEasy
+Completed the Quiz in 0.5 minutes!
+

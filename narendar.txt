@@ -1,0 +1,73 @@
+PhysicsEasy
+RESULT => You Got 4 marks out of 5 in PhysicsEasy
+Completed the Quiz in 1.2 minutes!
+
+MathEasy
+RESULT => You Got 2 marks out of 5 in MathEasy
+Completed the Quiz in 0.3 minutes!
+
+PhysicsEasy
+PhysicsEasy
+RESULT => You Got 3 marks out of 4 in PhysicsEasy
+Completed the Quiz in 0.7 minutes!
+
+MathEasy
+RESULT => You Got 2 marks out of 4 in MathEasy
+Completed the Quiz in 0.2 minutes!
+
+MathEasy
+RESULT => You Got 2 marks out of 4 in MathEasy
+Completed the Quiz in 0.3 minutes!
+
+MathEasy
+RESULT => You Got 1 marks out of 3 in MathEasy
+Completed the Quiz in 0.1 minutes!
+
+MathEasy
+RESULT => You Got 3 marks out of 4 in MathEasy
+Completed the Quiz in 0.2 minutes!
+
+MathEasy
+RESULT => You Got 2 marks out of 3 in MathEasy
+Completed the Quiz in 0.2 minutes!
+
+MathEasy
+RESULT => You Got 2 marks out of 4 in MathEasy
+Completed the Quiz in 0.2 minutes!
+
+MathEasy
+RESULT => You Got 2 marks out of 4 in MathEasy
+Completed the Quiz in 0.4 minutes!
+
+MathEasy
+RESULT => You Got 2 marks out of 4 in MathEasy
+Completed the Quiz in 0.2 minutes!
+
+MathEasy
+RESULT => You Got 2 marks out of 3 in MathEasy
+Completed the Quiz in 0.3 minutes!
+
+MathEasy
+RESULT => You Got 2 marks out of 4 in MathEasy
+Completed the Quiz in 0.2 minutes!
+
+MathEasy
+RESULT => You Got 2 marks out of 4 in MathEasy
+Completed the Quiz in 0.2 minutes!
+
+MathEasy
+RESULT => You Got 2 marks out of 4 in MathEasy
+Completed the Quiz in 0.2 minutes!
+
+MathEasy
+RESULT => You Got 2 marks out of 4 in MathEasy
+Completed the Quiz in 0.2 minutes!
+
+MathEasy
+RESULT => You Got 2 marks out of 4 in MathEasy
+Completed the Quiz in 0.2 minutes!
+
+MathEasy
+RESULT => You Got 5 marks out of 10 in MathEasy
+Completed the Quiz in 0.4 minutes!
+

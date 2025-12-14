@@ -1,0 +1,204 @@
+Medium
+Q: The SI unit of magnetic field is?
+A) Tesla
+B) Newton
+C) Ampere
+D) Volt
+A
+-----------------
+Q: The unit of electric potential is?
+A) Volt
+B) Watt
+C) Joule
+D) Ohm
+A
+-----------------
+Q: Ohm’s law states that V = ?
+A) I + R
+B) I X R
+C) I / R
+D) I - R
+B
+-----------------
+Q: The horizontal range of a projectile depends on?
+A) Initial speed and angle
+B) Mass only
+C) Height only
+D) Time only
+A
+-----------------
+Q: Work done = ?
+A) Force + Distance
+B) Force X Distance
+C) Force / Distance
+D) Force - Distance
+B
+-----------------
+Q: The acceleration of an object depends on?
+A) Mass
+B) Force
+C) Both Mass & Force
+D) None
+C
+-----------------
+Q: Heat transfer by circulation of molecules is called?
+A) Conduction
+B) Convection
+C) Radiation
+D) Diffusion
+B
+-----------------
+Q: The SI unit of pressure is?
+A) Pascal
+B) Newton
+C) Joule
+D) Watt
+A
+-----------------
+Q: The phenomenon of splitting of light into colors is?
+A) Reflection
+B) Dispersion
+C) Refraction
+D) Diffraction
+B
+-----------------
+Q: The force that keeps planets in orbit is?
+A) Magnetic
+B) Centripetal
+C) Gravitational
+D) Frictional
+C
+-----------------
+Q: Which law states “Action = Reaction”?
+A) Newton’s First Law
+B) Newton’s Second Law
+C) Newton’s Third Law
+D) Law of Gravitation
+C
+-----------------
+Q: 1 watt = ?
+A) 1 Joule / 1 sec
+B) 1 Joule X 1 sec
+C) 1 Joule + 1 sec
+D) 1 Joule - 1 sec
+A
+-----------------
+Q: The SI unit of frequency is?
+A) Hz
+B) Watt
+C) Newton
+D) Joule
+A
+-----------------
+Q: Light travels fastest in?
+A) Air
+B) Water
+C) Steel
+D) Vacuum
+D
+-----------------
+Q: The bending of light when it passes from one medium to another is?
+A) Reflection
+B) Refraction
+C) Diffraction
+D) Polarization
+B
+-----------------
+Q: The instrument to measure atmospheric pressure is?
+A) Thermometer
+B) Barometer
+C) Hygrometer
+D) Ammeter
+B
+-----------------
+Q: SI unit of energy is?
+A) Joule
+B) Watt
+C) Newton
+D) Volt
+A
+-----------------
+Q: Electrical resistance depends on?
+A) Length & Area
+B) Material
+C) Temperature
+D) All of the above
+D
+-----------------
+Q: Capacitor stores?
+A) Current
+B) Voltage
+C) Charge
+D) Resistance
+C
+-----------------
+Q: The unit of work is?
+A) Joule
+B) Newton
+C) Watt
+D) Volt
+A
+-----------------
+Q: A convex lens converges or diverges light?
+A) Converges
+B) Diverges
+C) Both
+D) None
+A
+-----------------
+Q: Unit of electric charge is?
+A) Volt
+B) Ampere
+C) Coulomb
+D) Ohm
+C
+-----------------
+Q: Frequency of alternating current is?
+A) 50 Hz
+B) 60 Hz
+C) 70 Hz
+D) 80 Hz
+A
+-----------------
+Q: Unit of gravitational constant G is?
+A) N m^2/kg^2
+B) N/kg
+C) m/s^2
+D) Nm
+A
+-----------------
+Q: Energy possessed due to motion is?
+A) Kinetic
+B) Potential
+C) Chemical
+D) Thermal
+A
+-----------------
+Q: SI unit of momentum is?
+A) kgm/s
+B) kgm^2/s
+C) Nm
+D) J
+A
+-----------------
+Q: The device that converts mechanical energy into electrical energy is?
+A) Battery
+B) Generator
+C) Transformer
+D) Motor
+B
+-----------------
+Q: Magnetic field lines never?
+A) Form a closed loop
+B) Intersect
+C) Extend to infinity
+D) Start from North Pole
+B
+-----------------
+Q: Sound cannot travel in?
+A) Solid
+B) Liquid
+C) Gas
+D) Vacuum
+D
+-----------------

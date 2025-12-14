@@ -1,0 +1,211 @@
+Easy
+Q: The SI unit of force is?
+A) Joule
+B) Newton
+C) Watt
+D) Pascal
+B
+-----------------
+Q: Acceleration due to gravity on Earth is approximately?
+A) 9.8 m/s^2
+B) 10 m/s^2
+C) 9.0 m/s^2
+D) 8.9 m/s^2
+A
+-----------------
+Q: The speed of light in vacuum is?
+A) 3 X 10^8 m/s
+B) 3 X 10^6 m/s
+C) 3 X 10^5 m/s
+D) 3 X 10^7 m/s
+A
+-----------------
+Q: Unit of electric current is?
+A) Volt
+B) Ampere
+C) Ohm
+D) Coulomb
+B
+-----------------
+Q: The lens used to correct myopia is?
+A) Concave
+B) Convex
+C) Plane
+D) None
+A
+-----------------
+Q: Work done is measured in?
+A) Joule
+B) Newton
+C) Watt
+D) Pascal
+A
+-----------------
+Q: 1 kilowatt = ? watts
+A) 1000
+B) 100
+C) 10
+D) 10000
+A
+-----------------
+Q: SI unit of pressure is?
+A) Pascal
+B) Newton
+C) Joule
+D) Watt
+A
+-----------------
+Q: Heat is measured in?
+A) Joule
+B) Watt
+C) Newton
+D) Volt
+A
+-----------------
+Q: Energy of a moving object is called?
+A) Potential energy
+B) Kinetic energy
+C) Thermal energy
+D) Chemical energy
+B
+-----------------
+Q: Sound travels fastest in?
+A) Air
+B) Water
+C) Steel
+D) Vacuum
+C
+-----------------
+Q: The device to measure electric current is?
+A) Voltmeter
+B) Ammeter
+C) Ohmmeter
+D) Galvanometer
+B
+-----------------
+Q: The angle of incidence = angle of reflection is law of?
+A) Refraction
+B) Reflection
+C) Diffraction
+D) Polarization
+B
+-----------------
+Q: Unit of frequency is?
+A) Hz
+B) Watt
+C) Joule
+D) Newton
+A
+-----------------
+Q: The SI unit of mass is?
+A) Gram
+B) Kilogram
+C) Pound
+D) Newton
+B
+-----------------
+Q: A body in motion tends to remain in motion is which law?
+A) Newton’s First Law
+B) Newton’s Second Law
+C) Newton’s Third Law
+D) Law of Gravitation
+A
+-----------------
+Q: The quantity of matter in a body is called?
+A) Weight
+B) Mass
+C) Density
+D) Volume
+B
+-----------------
+Q: Unit of electric resistance is?
+A) Ohm
+B) Volt
+C) Ampere
+D) Coulomb
+A
+-----------------
+Q: Device used to convert chemical energy into electrical energy?
+A) Battery
+B) Motor
+C) Transformer
+D) Generator
+A
+-----------------
+Q: The SI unit of work is?
+A) Newton
+B) Joule
+C) Watt
+D) Volt
+B
+-----------------
+Q: Unit of power is?
+A) Watt
+B) Joule
+C) Newton
+D) Volt
+A
+-----------------
+Q: Which law states F = ma?
+A) Newton’s First Law
+B) Newton’s Second Law
+C) Newton’s Third Law
+D) Law of Gravitation
+B
+-----------------
+Q: The phenomenon of bending of light is?
+A) Reflection
+B) Refraction
+C) Diffraction
+D) Polarization
+B
+-----------------
+Q: The SI unit of electric charge is?
+A) Ampere
+B) Coulomb
+C) Volt
+D) Watt
+B
+-----------------
+Q: Light is a form of?
+A) Mechanical wave
+B) Electromagnetic wave
+C) Sound wave
+D) Water wave
+B
+-----------------
+Q: The basic unit of temperature in SI system is?
+A) Celsius
+B) Kelvin
+C) Fahrenheit
+D) Joule
+B
+-----------------
+Q: The force which opposes motion is called?
+A) Friction
+B) Gravity
+C) Tension
+D) Applied Force
+A
+-----------------
+Q: Newton’s Third Law is?
+A) F = ma
+B) Action = Reaction
+C) Inertia
+D) Gravity
+B
+-----------------
+Q: The energy possessed due to position is?
+A) Kinetic
+B) Potential
+C) Thermal
+D) Chemical
+B
+-----------------
+Q: Speed = ?
+A) Distance X Time
+B) Distance / Time
+C) Mass X Acceleration
+D) Force X Distance
+B
+-----------------

@@ -1,0 +1,24 @@
+ChemHard
+RESULT => You Got 12 marks out of 33 in ChemHard
+Completed the Quiz in 0.9 minutes!
+
+MathEasy
+RESULT => You Got 0 marks out of 5 in MathEasy
+Completed the Quiz in 1.0 minutes!
+
+MathEasy
+RESULT => You Got 1 marks out of 1 in MathEasy
+Completed the Quiz in 1.1 minutes!
+
+MathEasy
+RESULT => You Got 1 marks out of 1 in MathEasy
+Completed the Quiz in 1.5 minutes!
+
+MathEasy
+RESULT => You Got 0 marks out of 1 in MathEasy
+Completed the Quiz in 1.5 minutes!
+
+MathMedium
+RESULT => You Got 18 marks out of 18 in MathMedium
+Completed the Quiz in 1.8 minutes!
+

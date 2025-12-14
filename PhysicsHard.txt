@@ -1,0 +1,218 @@
+Hard
+Q: The work done by a force is maximum when?
+A) Force is perpendicular to displacement
+B) Force is along displacement
+C) Force is opposite to displacement
+D) Force is zero
+B
+-----------------
+Q: SI unit of moment of inertia is?
+A) kgm^2
+B) kgm
+C) kgm^3
+D) Nm
+A
+-----------------
+Q: The principle of conservation of energy states?
+A) Energy can be created
+B) Energy cannot be destroyed
+C) Energy cannot be created or destroyed
+D) Energy is infinite
+C
+-----------------
+Q: Unit of surface tension is?
+A) N/m
+B) Nm
+C) N/m^2
+D) J
+A
+-----------------
+Q: When a body floats, upthrust = ?
+A) Weight of fluid displaced
+B) Mass of body
+C) Weight of body
+D) None
+C
+-----------------
+Q: Escape velocity of Earth is approximately?
+A) 7.9 km/s
+B) 8.9 km/s
+C) 9.8 km/s
+D) 10.8 km/s
+A
+-----------------
+Q: Capacitance of parallel plate capacitor depends on?
+A) Area & distance
+B) Material
+C) Voltage
+D) All above
+D
+-----------------
+Q: Frequency of light determines its?
+A) Color
+B) Intensity
+C) Speed
+D) Polarization
+A
+-----------------
+Q: The law V = IR is known as?
+A) Ohm’s Law
+B) Newton’s Law
+C) Faraday’s Law
+D) Coulomb’s Law
+A
+-----------------
+Q: The work done in moving a charge in an electric field is?
+A) Potential energy
+B) Electric work
+C) Kinetic energy
+D) Both A & B
+B
+-----------------
+Q: A projectile fired horizontally has vertical acceleration?
+A) 0
+B) g
+C) 2g
+D) g/2
+B
+-----------------
+Q: Resonance occurs when?
+A) Frequency matches natural frequency
+B) Frequency is double
+C) Frequency is half
+D) None
+A
+-----------------
+Q: Power dissipated in resistor = ?
+A) I^2R
+B) V^2/R
+C) Both A & B
+D) I/V
+C
+-----------------
+Q: The energy stored in a stretched spring = ?
+A) 1/2 kx^2
+B) kx^2
+C) k/2
+D) None
+A
+-----------------
+Q: Electric field intensity = ?
+A) F/q
+B) q/F
+C) Fxq
+D) F+q
+A
+-----------------
+Q: Moment of a force = ?
+A) Force x perpendicular distance
+B) Force / distance
+C) Force + distance
+D) None
+A
+-----------------
+Q: SI unit of angular velocity is?
+A) rad/s
+B) rad
+C) rad^2/s^2
+D) 1/s
+A
+-----------------
+Q: Condition for equilibrium: ΣF = ?
+A) 0
+B) 1
+C) 2
+D) None
+A
+-----------------
+Q: Young’s modulus is ratio of?
+A) Stress/Strain
+B) Strain/Stress
+C) Force/Area
+D) Area/Force
+A
+-----------------
+Q: The device used to measure small currents is?
+A) Ammeter
+B) Galvanometer
+C) Voltmeter
+D) Ohmmeter
+B
+-----------------
+Q: Heat capacity = ?
+A) Q/(T2 - T1)
+B) (T2-T1)/Q
+C) QX(T2-T1)
+D) None
+A
+-----------------
+Q: Efficiency of machine = ?
+A) Work input/Work output X100
+B) Work output/Work input X100
+C) Work output + Work input
+D) None
+B
+-----------------
+Q: SI unit of luminous intensity is?
+A) Candela
+B) Lux
+C) Lumen
+D) Watt
+A
+-----------------
+Q: Power = ?
+A) Work X Time
+B) Work / Time
+C) Force / Distance
+D) None
+B
+-----------------
+Q: Wave speed = ?
+A) Frequency X Wavelength
+B) Frequency / Wavelength
+C) Wavelength / Frequency
+D) None
+A
+-----------------
+Q: The phenomenon of splitting white light into colors?
+A) Refraction
+B) Dispersion
+C) Reflection
+D) Diffraction
+B
+-----------------
+Q: Terminal velocity occurs when?
+A) Force = 0
+B) Gravity = Air resistance
+C) Net force = 0
+D) None
+C
+-----------------
+Q: Refractive index = ?
+A) Speed of light in medium / speed in vacuum
+B) Speed in vacuum / speed in medium
+C) Both
+D) None
+B
+-----------------
+Q: The energy possessed by a body due to its position = ?
+A) Kinetic
+B) Potential
+C) Thermal
+D) Chemical
+B
+-----------------
+Q: The force that opposes motion = ?
+A) Friction
+B) Gravity
+C) Magnetic
+D) Tension
+A
+-----------------
+Q: Acceleration in uniform circular motion = ?
+A) v^2/r
+B) v/r
+C) r/v^2
+D) None
+A
+-----------------

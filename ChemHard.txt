@@ -1,0 +1,232 @@
+Hard
+Q: The atomic number of Iron is?
+A) 26
+B) 28
+C) 24
+D) 30
+A
+-----------------
+Q: The molar mass of CO2 is?
+A) 44 g/mol
+B) 42 g/mol
+C) 40 g/mol
+D) 46 g/mol
+A
+-----------------
+Q: Avogadro’s number is?
+A) 6.02 × 10^23
+B) 6.02 × 10^22
+C) 6.02 × 10^24
+D) 6.02 × 10^25
+A
+-----------------
+Q: The formula of nitric acid is?
+A) HNO3
+B) HCl
+C) H2SO4
+D) CH3COOH
+A
+-----------------
+Q: NaOH + AlCl3 → ?
+A) NaCl + Al(OH)3
+B) NaCl + AlCl
+C) NaAl + OH
+D) None
+A
+-----------------
+Q: The valency of Sulfur in H2SO4 is?
+A) 6
+B) 4
+C) 2
+D) 3
+A
+-----------------
+Q: The reaction Zn + H2SO4 → ?
+A) ZnSO4 + H2
+B) ZnSO4 + O2
+C) Zn + SO4
+D) Zn + H2
+A
+-----------------
+Q: The molecular formula of ethylene is?
+A) C2H4
+B) C2H6
+C) C3H6
+D) C3H8
+A
+-----------------
+Q: The process of converting solid to gas directly is?
+A) Sublimation
+B) Evaporation
+C) Condensation
+D) Freezing
+A
+-----------------
+Q: The percentage of oxygen in H2O is?
+A) 88.89%
+B) 11.11%
+C) 50%
+D) 66%
+A
+-----------------
+Q: The chemical formula of washing soda is?
+A) Na2CO3·10H2O
+B) NaHCO3
+C) CaCO3
+D) Na2SO4
+A
+-----------------
+Q: In electrolysis of water, gas at cathode is?
+A) Oxygen
+B) Hydrogen
+C) Chlorine
+D) Nitrogen
+B
+-----------------
+Q: The product of complete combustion of methane is?
+A) CO + H2O
+B) CO2 + H2O
+C) CO + O2
+D) CO2 + O2
+B
+-----------------
+Q: The reaction 2KClO3 → 2KCl + 3O2 is?
+A) Decomposition
+B) Combination
+C) Displacement
+D) Redox
+A
+-----------------
+Q: The oxidation number of N in NH3 is?
+A) -3
+B) -2
+C) -1
+D) 0
+A
+-----------------
+Q: CH4 + Cl2 → CH3Cl + HCl is?
+A) Substitution
+B) Addition
+C) Elimination
+D) Redox
+A
+-----------------
+Q: The reaction Fe2O3 + 3CO → 2Fe + 3CO2 is?
+A) Oxidation
+B) Reduction
+C) Both
+D) Decomposition
+C
+-----------------
+Q: The reaction of Na with water gives?
+A) NaOH + H2
+B) NaCl + H2O
+C) NaOH + O2
+D) NaH + O2
+A
+-----------------
+Q: The molecular weight of H2SO4 is?
+A) 98
+B) 100
+C) 96
+D) 102
+A
+-----------------
+Q: The reaction of acids with carbonates produces?
+A) CO2 + Salt + Water
+B) O2 + Salt
+C) H2 + Salt
+D) CO + Water
+A
+-----------------
+Q: Which of the following is amphoteric?
+A) Al(OH)3
+B) NaOH
+C) HCl
+D) KCl
+A
+-----------------
+Q: Fe + S → FeS is an example of?
+A) Combination
+B) Decomposition
+C) Displacement
+D) Redox
+A
+-----------------
+Q: The electron configuration of Oxygen is?
+A) 1s^2 2s^2 2p^4
+B) 1s^2 2s^2 2p^6
+C) 1s^2 2s^1 2p^3
+D) 1s^2 2s^2 2p^2
+A
+-----------------
+Q: The molarity of 1 mole of solute in 1 liter of solution is?
+A) 1M
+B) 2M
+C) 0.5M
+D) 0.1M
+A
+-----------------
+Q: The reaction Zn + CuSO4 → ZnSO4 + Cu is?
+A) Single displacement
+B) Double displacement
+C) Combination
+D) Decomposition
+A
+-----------------
+Q: The gas liberated when HCl reacts with Na2CO3 is?
+A) H2
+B) CO2
+C) O2
+D) N2
+B
+-----------------
+Q: The reaction 2H2 + O2 → 2H2O is?
+A) Combination
+B) Decomposition
+C) Displacement
+D) Redox
+A
+-----------------
+Q: The main constituent of limestone is?
+A) CaCO3
+B) CaO
+C) NaCl
+D) KCl
+A
+-----------------
+Q: The reaction CH3COOH + NaOH → CH3COONa + H2O is?
+A) Neutralization
+B) Oxidation
+C) Reduction
+D) Substitution
+A
+-----------------
+Q: Na2SO4 is commonly called?
+A) Glauber’s salt
+B) Washing soda
+C) Baking soda
+D) Lime
+A
+-----------------
+Q: The chemical formula of nitric acid is?
+A) HNO3
+B) HCl
+C) H2SO4
+D) CH3COOH
+A
+-----------------
+Q: The gas released in photosynthesis is?
+A) O2
+B) CO2
+C) H2
+D) N2
+A
+-----------------
+Q: Fe2O3 + 2Al → 2Fe + Al2O3 is?
+A) Thermite reaction
+B) Redox reaction
+C) Combination
+D) Decomposition
+A
+-----------------

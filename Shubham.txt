@@ -1,0 +1,4 @@
+MathMedium
+RESULT => You Got 5 marks out of 20 in MathMedium
+Completed the Quiz in 0.7 minutes!
+
