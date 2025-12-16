@@ -1426,7 +1426,7 @@ void ViewRecords(string userName) {
     while (getline(records, line)) {
         i++;
         if (i % 4 == 1) {
-            cout << CYAN << i << ". In Topic " << line << RESET << endl;
+            cout << CYAN << (i/4)+1 << ". In Topic " << line << RESET << endl;
         }
         else {
             cout << line << endl;
