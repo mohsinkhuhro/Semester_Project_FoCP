@@ -296,22 +296,6 @@ Inside `MakeQuiz(...)`, the complete quiz logic works as follows:
 - File I/O uses `ifstream` and `ofstream` for reading and writing data.  
 
 ---
-
-## How to Compile and Run
-
-1. Make sure you have a C++ compiler that supports C++11 or later (e.g., g++, clang++, MSVC).  
-2. Save the source code as `main.cpp`.  
-3. Compile using:
-   ```bash
-   g++ -std=c++11 main.cpp -o mcqs_quiz_app
-   ```
-4. Run the program:
-   ```bash
-   ./mcqs_quiz_app
-   ```
-
----
-
 ## Summary
 
 This MCQs Quiz App is a complete, menu-driven console application suitable for classroom use. Teachers can quickly set up topics and questions, and students can take timed quizzes and review their performance. All data is automatically saved to text files, making the system persistent and easy to understand.
