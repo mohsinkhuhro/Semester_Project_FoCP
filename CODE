@@ -1,14 +1,13 @@
 #include <iostream>
 #include <fstream> // for file handling
-#include <string>
-#include <cstdio>  
-#include <limits> // for ignore cin
 #include <chrono> // for time
 #include <iomanip> // for digits after point
 #include <cstdlib>
 #include <ctime>
 #include <conio.h>
-
+#include <string>
+#include <cstdio>
+#include <limits> // for ignore cin
 using namespace std;
 
 
@@ -31,7 +30,7 @@ void AddNewTopic(string topicName[], string& difficulty, string Topics[][6]);
 void RemoveTopic();
 void AddMcqsToTopic(string topicName[], string& difficulty, string Topics[][6]);
 void ViewTopicMcqs(string& difficulty);
-void MakeQuiz(string& TopicName, string userName, string& difficulty);
+void MakeQuiz(string& TopicName,string userName, string& difficulty);
 void ViewRecords(string userName);
 void AddStudents();
 void ViewStudentsRecord();
@@ -52,10 +51,9 @@ int main() {
     cout << CYAN << "====================================\n\n";
     ChooseMode(topicName, difficulty, Topics);
 
-
-
     return 0;
 }
+
 // FOR SELCETIN MODES(ADMIN/USER)
 void ChooseMode(string topicName[], string& difficulty, string Topics[100][6]) {
     string storedHash = "bc7df16747d8a79bbe0da2757a4ad66dfafb888a4cd825c3963589cac405c8e0";
@@ -63,7 +61,7 @@ void ChooseMode(string topicName[], string& difficulty, string Topics[100][6]) {
     string password = "vishal", pass;
 
     while (true) {
-        cout << YELLOW << "Select Mode:\n" << RESET;
+        cout <<BOLD<< YELLOW << "Select Mode:\n" << RESET;
         cout << GREEN << "1. Admin\n" << RESET;
         cout << GREEN << "2. User\n" << RESET;
         cout << GREEN << "3. Exit APP\n" << RESET;
@@ -78,13 +76,13 @@ void ChooseMode(string topicName[], string& difficulty, string Topics[100][6]) {
 
             }
             else {
-                cout << RED << "Wrong password!\n" << RESET;
+                cout <<RED<< "Wrong password!\n"<<RESET;
                 continue;
             }
         }
         else if (x == "2") {
-
-            UserMode(topicName, difficulty);
+            
+           UserMode(topicName, difficulty);
         }
         else if (x == "3") {
             cout << RED << "YOU EXIT THE APP\n" << RESET;
@@ -102,7 +100,7 @@ void AdminMode(string topicName[], string& difficulty, string Topics[100][6]) {
     string choose;
     string exit;
     while (true) {
-        cout << "\ncontinue Admin mode ? > enter: 1\nExit Admin mode ? > enter: 2\n";
+        cout <<BOLD<< YELLOW<< "\ncontinue Admin mode ? > enter: 1\nExit Admin mode ? > enter: 2\n"<<RESET;
         cin >> exit;
         if (exit == "2") return;
         else if (exit != "1") {
@@ -122,7 +120,7 @@ void AdminMode(string topicName[], string& difficulty, string Topics[100][6]) {
         cin >> choose;
 
         if (choose == "1") {
-            AddNewTopic(topicName, difficulty, Topics);
+            AddNewTopic(topicName, difficulty, Topics); 
         }
         else if (choose == "2") RemoveTopic();
 
@@ -133,7 +131,7 @@ void AdminMode(string topicName[], string& difficulty, string Topics[100][6]) {
         }
         else if (choose == "5") {
             AddStudents();
-
+           
         }
         else if (choose == "6") {
             ViewStudentsRecord();
@@ -149,19 +147,19 @@ void AdminMode(string topicName[], string& difficulty, string Topics[100][6]) {
 }
 //IT WILL ADD NEW TOPICS AND QUESTIONS
 void AddNewTopic(string topicName[], string& difficulty, string Topics[100][6]) {
-
+    
     string out = "1", level;
     string line;
 
     for (int i = 0; (i < 100); i++) {
-        cout << "Enter 1 or 2: \n1. continue, enter new topic\n2. Back to Admin\n ";
+        cout <<BOLD<<YELLOW<< "Enter 1 or 2: \n1. continue, enter new topic\n2. Back to Admin\n "<<RESET;
         cin >> out;
         if (out == "2") {
-            cout << "You Exit Add New topics\n";
+            cout <<BOLD<<GREEN<< "You Exit Add New topics\n"<<RESET;
             return;
         }
         else if (out != "1") {
-            cout << RED << "Invalid Command!\n" << RESET;
+            cout <<RED<< "Invalid Command!\n"<<RESET;
             continue;
         }
         bool Available = false;
@@ -188,7 +186,7 @@ void AddNewTopic(string topicName[], string& difficulty, string Topics[100][6]) 
         ifstream inN;
 
 
-        cout << "\nEnter the Difficulty level of Quiz: \n1. Easy\n2. Medium\n3. Hard \n";
+        cout << BOLD<<YELLOW<<"\nEnter the Difficulty level of Quiz: \n1. Easy\n2. Medium\n3. Hard \n"<<RESET;
         cin >> level;
         cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
 
@@ -230,14 +228,14 @@ void AddNewTopic(string topicName[], string& difficulty, string Topics[100][6]) 
                 outN << "B) " << Topics[q][2] << endl;
                 outN << "C) " << Topics[q][3] << endl;
                 outN << "D) " << Topics[q][4] << endl;
-                outN << Topics[q][5] << endl;
+                outN  << Topics[q][5] << endl;
                 outN << "-----------------" << endl;
 
                 q++;
                 while (true) {
-                    cout << "\nEnter 1 or 2 \n1. continue, entring mcqs\n2. Back\n";
+                    cout <<BOLD<<YELLOW<< "\nEnter 1 or 2 \n1. continue, entring mcqs\n2. Back\n"<<RESET;
                     cin >> exit;
-
+               
                     if (exit == "2" || exit == "1") break;
                     else if (exit != "1") {
                         cout << RED << "Invalid Command!\n" << RESET;
@@ -293,7 +291,7 @@ void AddNewTopic(string topicName[], string& difficulty, string Topics[100][6]) 
                 outN << "B) " << Topics[q][2] << endl;
                 outN << "C) " << Topics[q][3] << endl;
                 outN << "D) " << Topics[q][4] << endl;
-                outN << Topics[q][5] << endl;
+                outN  << Topics[q][5] << endl;
                 outN << "-----------------" << endl;
                 q++;
 
@@ -309,10 +307,6 @@ void AddNewTopic(string topicName[], string& difficulty, string Topics[100][6]) 
                 }
                 if (exit == "2") break;
                 cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
-
-
-
-
 
             }
             outN.close();
@@ -356,15 +350,15 @@ void AddNewTopic(string topicName[], string& difficulty, string Topics[100][6]) 
                 outN << "B) " << Topics[q][2] << endl;
                 outN << "C) " << Topics[q][3] << endl;
                 outN << "D) " << Topics[q][4] << endl;
-                outN << Topics[q][5] << endl;
+                outN<< Topics[q][5] << endl;
                 outN << "-----------------" << endl;
 
                 q++;
-
+                
                 while (true) {
                     cout << "\nEnter 1 or 2 \n1. continue, entring mcqs\n2. Back\n";
                     cin >> exit;
-                    if (exit == "2" || exit == "1") break;
+                    if (exit == "2" || exit=="1") break;
                     else if (exit != "1") {
                         cout << RED << "Invalid Command!\n" << RESET;
                         continue;
@@ -372,11 +366,6 @@ void AddNewTopic(string topicName[], string& difficulty, string Topics[100][6]) 
                 }
                 if (exit == "2") break;
                 cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
-
-
-
-
-
 
             }
             outN.close();
@@ -397,7 +386,7 @@ void RemoveTopic() {
     string line;
     string originalTopicName;
     do {
-        cout << "\nEnter 1 or 2:\n1. continue, Remove Topic\n2. Back to Admin\n";
+        cout <<BOLD<<YELLOW<< "\nEnter 1 or 2:\n1. continue, Remove Topic\n2. Back to Admin\n"<<RESET;
         cin >> exit;
         if (exit == "2") return;
         else if (exit != "1") {
@@ -419,7 +408,7 @@ void RemoveTopic() {
         outN.clear();
         outN.seekg(0);
 
-        cout << "\nEnter the topic which you want to remove: ";
+        cout <<BOLD<<YELLOW<< "\nEnter the topic which you want to remove: "<<RESET;
         getline(cin, Name);
         found = false;
         removeComp = false;
@@ -431,115 +420,115 @@ void RemoveTopic() {
             }
             else { in << line << endl; }
         }
-        while (found) {
+            while (found){
 
-            cout << "\nEnter the Difficulty level of Topic: \n1. Easy\n2. Medium\n3. Hard \n4. Whole topic\n";
-            cin >> level;
-            cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
-            if (level == "1") {
-                originalTopicName += "Easy";
-                cout << "Remove " << originalTopicName << " ?\n1. Yes\n2. NO\nEnter 1 or 2: ";
-                cin >> confirm;
+                cout << "\nEnter the Difficulty level of Topic: \n1. Easy\n2. Medium\n3. Hard \n4. Whole topic\n";
+                cin >> level;
+                cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+                if (level == "1") {
+                    originalTopicName += "Easy";
+                    cout << "Remove " << originalTopicName << " ?\n1. Yes\n2. NO\nEnter 1 or 2: ";
+                    cin >> confirm;
 
-                if (confirm == "1") {
+                    if (confirm == "1") {
 
 
-                    if (remove((originalTopicName + ".txt").c_str()) == 0) {
+                        if (remove((originalTopicName + ".txt").c_str()) == 0) {
+
+                            cout <<GREEN<< originalTopicName <<RESET<<RED<< " Removed!\n"<<RESET;
+                            break;
+                        }
+                        else {
+                            cout <<RED<< originalTopicName << " Is NOT Available!\n"<<RESET;
+                            break;
+                        }
+
+                    }
+                    else {
+                        break;
+                    }
+                }
+                if (level == "2") {
+                    originalTopicName += "Medium";
+                    cout << "Remove " << originalTopicName << " ?\n1. Yes\n2. NO\nEnter 1 or 2: ";
+                    cin >> confirm;
+
+                    if (confirm == "1") {
+
+
+                        if (remove((originalTopicName + ".txt").c_str()) == 0) {
+
+
+                            cout << GREEN << originalTopicName << RESET << RED << " Removed!\n" << RESET;
+                            break;
+                        }
+                        else {
+                            cout << RED << originalTopicName << " Is NOT Available!\n" << RESET;
+                            break;
+                        }
+
+                    }
+
+
+
+                    else {
+                        break;
+                    }
+                }
+                if (level == "3") {
+                    originalTopicName += "Hard";
+                    cout << "Remove " << originalTopicName << " ?\n1. Yes\n2. NO\nEnter 1 or 2: ";
+                    cin >> confirm;
+
+                    if (confirm == "1") {
+
+
+                        if (remove((originalTopicName + ".txt").c_str()) == 0) {
+
+
+                            cout << GREEN << originalTopicName << RESET << RED << " Removed!\n" << RESET;
+                            break;
+                        }
+                        else {
+                            cout << RED << originalTopicName << " Is NOT Available!\n" << RESET;
+                            break;
+
+                        }
+
+
+
+                    }
+                    else {
+                        break;
+                    }
+                }
+                if (level == "4") {
+                    originalTopicName += "All";
+                    cout << "Remove " << originalTopicName << " ?\n1. Yes\n2. NO\nEnter 1 or 2: ";
+                    cin >> confirm;
+                    found = true;
+                    if (confirm == "1") {
+
+                        remove((originalTopicName + "Easy.txt").c_str());
+                        remove((originalTopicName + "Medium.txt").c_str());
+                        remove((originalTopicName + "Hard.txt").c_str());
+                        removeComp = true;
 
                         cout << GREEN << originalTopicName << RESET << RED << " Removed!\n" << RESET;
                         break;
                     }
                     else {
-                        cout << RED << originalTopicName << " Is NOT Available!\n" << RESET;
+                       
                         break;
                     }
-
                 }
                 else {
-                    break;
+                    cout <<RED<< "Invalid Command!\n"<<RESET;
                 }
             }
-            if (level == "2") {
-                originalTopicName += "Medium";
-                cout << "Remove " << originalTopicName << " ?\n1. Yes\n2. NO\nEnter 1 or 2: ";
-                cin >> confirm;
-
-                if (confirm == "1") {
-
-
-                    if (remove((originalTopicName + ".txt").c_str()) == 0) {
-
-
-                        cout << GREEN << originalTopicName << RESET << RED << " Removed!\n" << RESET;
-                        break;
-                    }
-                    else {
-                        cout << RED << originalTopicName << " Is NOT Available!\n" << RESET;
-                        break;
-                    }
-
-                }
-
-
-
-                else {
-                    break;
-                }
-            }
-            if (level == "3") {
-                originalTopicName += "Hard";
-                cout << "Remove " << originalTopicName << " ?\n1. Yes\n2. NO\nEnter 1 or 2: ";
-                cin >> confirm;
-
-                if (confirm == "1") {
-
-
-                    if (remove((originalTopicName + ".txt").c_str()) == 0) {
-
-
-                        cout << GREEN << originalTopicName << RESET << RED << " Removed!\n" << RESET;
-                        break;
-                    }
-                    else {
-                        cout << RED << originalTopicName << " Is NOT Available!\n" << RESET;
-                        break;
-
-                    }
-
-
-
-                }
-                else {
-                    break;
-                }
-            }
-            if (level == "4") {
-                originalTopicName += "All";
-                cout << "Remove " << originalTopicName << " ?\n1. Yes\n2. NO\nEnter 1 or 2: ";
-                cin >> confirm;
-                found = true;
-                if (confirm == "1") {
-
-                    remove((originalTopicName + "Easy.txt").c_str());
-                    remove((originalTopicName + "Medium.txt").c_str());
-                    remove((originalTopicName + "Hard.txt").c_str());
-                    removeComp = true;
-
-                    cout << GREEN << originalTopicName << RESET << RED << " Removed!\n" << RESET;
-                    break;
-                }
-                else {
-
-                    break;
-                }
-            }
-            else {
-                cout << RED << "Invalid Command!\n" << RESET;
-            }
-        }
         // for removig topic from topicname file
 
-
+     
         outN.close();
         in.close();
         outN.close();
@@ -548,7 +537,7 @@ void RemoveTopic() {
             rename("temp.txt", "topicNames.txt");
         }
         if (!found) {
-            cout << YELLOW << "Either topic is not included or Spelling is not Correct!\n" << RESET;
+            cout <<YELLOW<< "Either topic is not included or Spelling is not Correct!\n"<<RESET;
             continue;
         }
     } while (Invalid);
@@ -566,7 +555,7 @@ void AddMcqsToTopic(string topicName[], string& difficulty, string Topics[100][6
     string line;
     bool Invalid = true;
     do {
-        cout << "Enter 1 or 2:\n1. continue Add mcqs to topic\n2. Back to Admin mode \n";
+        cout <<BOLD<<YELLOW<< "Enter 1 or 2:\n1. continue Add mcqs to topic\n2. Back to Admin mode \n"<<RESET;
         cin >> confirm;
         cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
 
@@ -599,7 +588,7 @@ void AddMcqsToTopic(string topicName[], string& difficulty, string Topics[100][6
         out.close();
 
         if (!found) {
-            cout << YELLOW << "Either topic is not included or Spelling is not Correct!\n" << RESET;
+            cout <<YELLOW<< "Either topic is not included or Spelling is not Correct!\n"<<RESET;
             continue;
         }
         else {
@@ -708,7 +697,7 @@ void AddMcqsToTopic(string topicName[], string& difficulty, string Topics[100][6
                     outN << "B) " << Topics[q][2] << endl;
                     outN << "C) " << Topics[q][3] << endl;
                     outN << "D) " << Topics[q][4] << endl;
-                    outN << Topics[q][5] << endl;
+                    outN<< Topics[q][5] << endl;
                     outN << "-----------------" << endl;
                     q++;
 
@@ -844,7 +833,7 @@ void ViewTopicMcqs(string& difficulty) {
         }
         out.close();
         if (!found) {
-            cout << YELLOW << "Either topic is not included or Spelling is not Correct!\n" << RESET;
+            cout <<YELLOW<< "Either topic is not included or Spelling is not Correct!\n"<<RESET;
             continue;
         }
         else {
@@ -864,12 +853,12 @@ void ViewTopicMcqs(string& difficulty) {
                 difficulty = "Easy";
                 outN.open(Name + "Easy.txt");
                 if (!outN.is_open()) {
-                    cout << YELLOW << Name << " " << difficulty << " is NOT included!\n" << RESET;
+                    cout <<YELLOW<< Name << " " << difficulty << " is NOT included!\n"<<RESET;
                     continue;
                 }
                 else {
 
-
+                    
                     int x = 0;
                     while (getline(outN, line)) {
                         x++;
@@ -926,7 +915,7 @@ void ViewTopicMcqs(string& difficulty) {
                 }
             }
             else {
-                cout << RED << "Invalid Command!\n" << RESET;
+                cout <<RED<< "Invalid Command!\n"<<RESET;
                 continue;
             }
         }
@@ -936,14 +925,13 @@ void ViewTopicMcqs(string& difficulty) {
 void AddStudents() {
     string confirm;
     string username;
-
-
-    while (true) {
+    
+    
+    while(true) {
         string name;
         ofstream outN;
         int i = 0;
         bool alr = false;
-		bool found = true;
         ifstream in("Usernames.txt");
         cout << "Enter 1 or 2:\n1. continue Add students (username)\n2. Back to Admin mode\n";
         cin >> confirm;
@@ -952,28 +940,20 @@ void AddStudents() {
             cout << RED << "Invalid Command!\n" << RESET;
             continue;
         }
-        
-        if (in.peek() == ifstream::traits_type::eof()) {
-            cout << RED << "there is NO already added student found\n" << RESET;
-            cout << WHITE << "====================================\n\n";
-            found = false;
-        }
-        if (found) {
-            cout << YELLOW << "\nLIST OF STUDENTS (Already added)\n";
-            while (getline(in, name)) {
-                cout << BOLD << ++i << ". " << name << endl;
-            }
+        cout <<YELLOW<< "\nLIST OF STUDENTS (Already added)\n";
+        while (getline(in, name)) {
+            cout <<BOLD<< ++i << ". " << name << endl;
         }
         in.close();
         in.open("Usernames.txt");
-        cout << RESET << "Enter the username to Add new student: ";
+        cout <<RESET<< "Enter the username to Add: ";
         cin >> username;
         while (getline(in, name)) {
             if (username == name) {
-                cout << GREEN << username << YELLOW << " is Already Added!\n" << RESET;
+                cout <<GREEN<<username <<YELLOW<< " is Already Added!\n"<<RESET;
                 alr = true;
                 break;
-            }
+           }
         }
         if (!alr) {
             outN.open("Usernames.txt", ios::app);
@@ -997,7 +977,7 @@ void ViewStudentsRecord() {
         found = false;
         Invalid = true;
 
-        cout << "Enter 1 or 2:\n1. continue View Students Record\n2. Back to Admin mode\n";
+        cout <<YELLOW<< "Enter 1 or 2:\n1. continue View Students Record\n2. Back to Admin mode\n"<<RESET;
         cin >> confirm;
         cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
 
@@ -1010,10 +990,10 @@ void ViewStudentsRecord() {
         line = "";
 
         while (getline(out, line)) {
-            cout << "=> " << GREEN << line << RESET << endl;
+            cout<< "=> " << BOLD<<YELLOW<< line <<RESET<< endl;
         }
 
-        cout << "Enter username to view Records : ";
+        cout <<BOLD<< BLUE<<"Enter username to view Records : "<<RESET;
         getline(cin, Name);
 
         out.close();
@@ -1028,7 +1008,7 @@ void ViewStudentsRecord() {
         }
         out.close();
         if (!found) {
-            cout << "Enter the correct username!\n";
+            cout <<RED<< "Enter the correct username!\n"<<RESET;
             continue;
         }
         else {
@@ -1049,17 +1029,17 @@ void UserMode(string topicName[], string& difficulty) {
     ifstream out;
     while (true) {
         found = false;
-        cout << "Enter 1 or 2:\n1. continue User mode\n2. Exit\n";
+        cout <<BOLD<<YELLOW<< "Enter 1 or 2:\n1. continue User mode\n2. Exit\n"<<RESET;
         cin >> confirm;
         cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
 
         if (confirm == "2") return;
         else if (confirm != "1") {
-            cout << RED << "Invalid Command!\n" << RESET;
+            cout <<RED<< "Invalid Command!\n"<<RESET;
             continue;
         }
 
-        cout << "Enter the Username: ";
+        cout <<BOLD<<BLUE<< "Enter the Username: "<<RESET;
         cin >> username;
         cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
         out.open("Usernames.txt");
@@ -1073,7 +1053,7 @@ void UserMode(string topicName[], string& difficulty) {
         }
         out.close();
         if (!found) {
-            cout << RED << "Enter the correct username!\n" << RESET;
+            cout <<RED<< "Enter the correct username!\n"<<RESET;
             continue;
         }
         else {
@@ -1081,8 +1061,8 @@ void UserMode(string topicName[], string& difficulty) {
             ofstream results(username + ".txt", ios::app);
 
             cout << CYAN << "====================================\n";
-            cout << BOLD << " WELCOME " << username << " TO MCQS QUIZ APP\n" << RESET;
-            cout << CYAN << "====================================\n" << RESET;
+            cout << BOLD << " WELCOME "<<username<< " TO MCQS QUIZ APP\n" << RESET;
+            cout << CYAN << "====================================\n"<<RESET;
 
 
 
@@ -1097,7 +1077,7 @@ void UserMode(string topicName[], string& difficulty) {
                 cout << CYAN << "Enter choice: " << RESET;
                 cin >> confirm;
                 cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
-
+     
                 if (confirm == "2") {
                     ViewRecords(username);
                     continue;
@@ -1114,7 +1094,7 @@ void UserMode(string topicName[], string& difficulty) {
                     cout << "=> " << line << endl;
                 }
 
-                cout << "Enter topic for QUIZ : ";
+                cout << "Enter topic Name for QUIZ : ";
                 getline(cin, Name);
 
                 out.close();
@@ -1129,66 +1109,66 @@ void UserMode(string topicName[], string& difficulty) {
                 }
                 out.close();
                 if (!found) {
-                    cout << YELLOW << "Either topic is not included or Spelling is not Correct!\n" << RESET;
+                    cout <<YELLOW<< "Either topic is not included or Spelling is not Correct!\n"<<RESET;
                     continue;
                 }
                 else {
-
-                    ifstream outN;
-                    ofstream cheack;
-                    cout << "\nEnter the Difficulty level of QUIZ:(enter 1,2,or 3)\n1. Easy\n2. Medium\n3. Hard \n";
-                    cin >> level;
-                    cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
-
-
+                
+                        ifstream outN;
+                        ofstream cheack;
+                        cout << "\nEnter the Difficulty level of QUIZ:(enter 1,2,or 3)\n1. Easy\n2. Medium\n3. Hard \n";
+                        cin >> level;
+                        cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
 
 
-                    if (level == "1") {
-                        difficulty = "Easy";
-                        Name += difficulty;
-                        outN.open(Name + ".txt");
-                        if (!outN.is_open()) {
-                            cout << YELLOW << Name << " " << difficulty << " is NOT included!\n" << RESET;
-                            continue;
+                       
+
+                        if (level == "1") {
+                            difficulty = "Easy";
+                            Name += difficulty;
+                            outN.open(Name + ".txt");
+                            if (!outN.is_open()) {
+                                cout <<YELLOW<< Name << " " << difficulty << " is NOT included!\n"<<RESET;
+                                continue;
+                            }
+                            else {
+
+                                MakeQuiz(Name, username, difficulty);
+                            }
+                        }
+                        else if (level == "2") {
+                            difficulty = "Medium";
+                            Name += difficulty;
+                            outN.open(Name + ".txt");
+
+                            if (!outN.is_open()) {
+                                cout <<YELLOW<< Name << " " << difficulty << " is NOT included!\n";
+                                continue;
+                            }
+                            else {
+
+                                MakeQuiz(Name, username, difficulty);
+                            }
+                        }
+                        else if (level == "3") {
+                            difficulty = "Hard";
+                            Name += difficulty;
+                            outN.open(Name + ".txt");
+
+                            if (!outN.is_open()) {
+                                cout <<YELLOW<< Name << " " << difficulty << " is NOT included!\n";
+                                continue;
+                            }
+                            else {
+                                MakeQuiz(Name, username, difficulty);
+                            }
                         }
                         else {
-
-                            MakeQuiz(Name, username, difficulty);
-                        }
-                    }
-                    else if (level == "2") {
-                        difficulty = "Medium";
-                        Name += difficulty;
-                        outN.open(Name + ".txt");
-
-                        if (!outN.is_open()) {
-                            cout << YELLOW << Name << " " << difficulty << " is NOT included!\n";
+                            cout << "Invalid Command!\n";
                             continue;
                         }
-                        else {
-
-                            MakeQuiz(Name, username, difficulty);
-                        }
                     }
-                    else if (level == "3") {
-                        difficulty = "Hard";
-                        Name += difficulty;
-                        outN.open(Name + ".txt");
-
-                        if (!outN.is_open()) {
-                            cout << YELLOW << Name << " " << difficulty << " is NOT included!\n";
-                            continue;
-                        }
-                        else {
-                            MakeQuiz(Name, username, difficulty);
-                        }
-                    }
-                    else {
-                        cout << "Invalid Command!\n";
-                        continue;
-                    }
-                }
-
+                
             } while (true);
 
         }
@@ -1226,7 +1206,7 @@ void MakeQuiz(string& TopicName, string userName, string& difficulty) {
     cheack.seekg(0);
 
     do {
-        cout << "Enter the number of MCQS for QUIZ!\n";
+        cout <<BOLD<<YELLOW<< "Enter the number of MCQS for QUIZ!\n"<<RESET;
         cout << GREEN << "NOTE => you can enter the Maximum (" << AvaQues << ") MCQS!!\n" << RESET;
         cin >> Noofmcqs;
         cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
@@ -1305,17 +1285,17 @@ void MakeQuiz(string& TopicName, string userName, string& difficulty) {
 
             auto end = chrono::high_resolution_clock::now();
             auto timetaken = chrono::duration_cast<chrono::seconds>(end - start);
-            average = (score / Noofmcqs) * (100.0);
+            average = (score / Noofmcqs)*(100.0);
             cout << RED << "QUIZ ENDS!!\n" << RESET;
             cout << CYAN << "====================================\n";
             cout << BOLD << "            QUIZ RESULTS\n" << RESET;
             cout << CYAN << "====================================\n\n";
             cout << GREEN << "Score: " << score << " out of " << Noofmcqs << RESET << "\n";
             if (average <= 50) {
-                cout << RED << "PRECENTAGE: " << average << "%" << RESET << endl;
+                cout << RED << "PRECENTAGE: " << average << "%" << RESET<<endl;
             }
             else {
-                cout << GREEN << "PRECENTAGE: " << average << "%" << RESET << endl;
+                cout << GREEN << "PRECENTAGE: " << average << "%" << RESET<<endl;
             }
             cout << YELLOW << "Time Taken: " << fixed << setprecision(1) << timetaken.count() / 60.0 << " minutes\n" << RESET;
             cout << CYAN << "====================================\n" << RESET;
@@ -1323,7 +1303,7 @@ void MakeQuiz(string& TopicName, string userName, string& difficulty) {
             results << "RESULT => You Got " << score << " marks out of " << Noofmcqs << " in " << TopicName << endl;
             results << "Completed the Quiz in " << fixed << setprecision(1) << timetaken.count() / 60.0 << " minutes!\n" << endl;
 
-            cout << "Want complete Solution and analysis?\nenter: 1 for complete solution\nenter: any number to EXIT!\n";
+            cout <<YELLOW<< "Want complete Solution and Analysis?\n"<<GREEN<<"enter: 1 for complete solution\nenter : any number to EXIT!\n"<<RESET;
             cin >> confirm;
 
             int wrongQ[500], wCount = 0;
@@ -1347,16 +1327,16 @@ void MakeQuiz(string& TopicName, string userName, string& difficulty) {
                 cheack.clear();
                 cheack.seekg(0);
 
-
-
+                
+              
                 getline(cheack, useless);
+               
 
-
-
+               
                 for (int q = 1; q <= Noofmcqs; q++) {
                     string qline, optA, optB, optC, optD, corr, sep;
 
-
+                    
                     if (!getline(cheack, qline)) break;
                     if (!getline(cheack, optA)) break;
                     if (!getline(cheack, optB)) break;
@@ -1364,14 +1344,14 @@ void MakeQuiz(string& TopicName, string userName, string& difficulty) {
                     if (!getline(cheack, optD)) break;
                     if (!getline(cheack, corr)) break;
 
-
-                    cout << BOLD << "Question NO. " << q << ": " << RESET << endl << qline << endl;
+                   
+                    cout << BOLD << "Question NO. " << q << ": " << RESET <<endl<< qline << endl;
                     cout << optA << endl;
                     cout << optB << endl;
                     cout << optC << endl;
                     cout << optD << endl;
 
-
+                  
                     bool isWrong = false;
                     string wGiven;
                     for (int i = 0; i < wCount; i++) {
@@ -1382,7 +1362,7 @@ void MakeQuiz(string& TopicName, string userName, string& difficulty) {
                         }
                     }
 
-
+                    
                     if (isWrong) {
                         cout << RED << "Your Answer: " << wGiven << RESET << endl;
                         cout << GREEN << "Correct Answer: " << corr << RESET << endl;
@@ -1391,7 +1371,7 @@ void MakeQuiz(string& TopicName, string userName, string& difficulty) {
                         cout << GREEN << "Correct Answer: " << corr << RESET << endl;
                     }
 
-
+                    
                     getline(cheack, sep);
                     cout << WHITE << "------------------------------------\n" << RESET;
                 }
@@ -1415,10 +1395,10 @@ void ViewRecords(string userName) {
     string line;
     ifstream records(userName + ".txt");
     cout << WHITE << "====================================\n";
-    cout << CYAN << "<=== " << BOLD << userName << " Records" << RESET << CYAN << " ===>\n\n" << RESET;
-
+    cout <<CYAN<<"<=== "<<BOLD<< userName << " Records"<<RESET<<CYAN<<" ===>\n\n" << RESET;
+    
     if (records.peek() == ifstream::traits_type::eof()) {
-        cout << RED << "NO Records Found!\n" << RESET;
+        cout <<RED<< "NO Records Found!\n"<<RESET;
         cout << WHITE << "====================================\n\n";
         return;
     }
@@ -1434,6 +1414,7 @@ void ViewRecords(string userName) {
     }
     cout << WHITE << "====================================\n\n";
 }
+
 string getHiddenInput() {
     string pass = "";
     char ch;
